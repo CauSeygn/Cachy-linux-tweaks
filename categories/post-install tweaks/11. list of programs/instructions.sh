@@ -17,17 +17,17 @@
 # Text editor: kate, micro, vs code (not vs codium), nano
 # Office suite: onlyoffice
 # Alarm: kalarm
-# Virtual machines: qemu, virt-manager
-# Android emulator: genymotion
+# Virtual machines: qemu, virt-manager (check ufw or disable it)
+# Android emulator: genymotion (check ufw or disable it)
 # Emulators: pcsx2, rpcs3, ppsspp
 # GPU fan curve control: lact
 # Weather widget: weather widget plus
-# Phone<->PC connectivity: kde connect, samba, material files (android), wormhole-rs
+# Phone<->PC connectivity: kde connect (check ufw or disable it), samba, material files (android), wormhole-rs
 # PC<->PC connectivity:samba, wormhole-rs
 # File searching and indexing: fsearch
 # System monitoring: btop, mission control, cpu-x, nvtop, nvitop (nvidia)
 # Diff program: kompare, meld
-# Remote access: rustdesk
+# Remote access: rustdesk (check ufw or disable it)
 # Messaging: signal desktop
 # Audio routing: qpwgraph
 # Image upscaling: upscayl

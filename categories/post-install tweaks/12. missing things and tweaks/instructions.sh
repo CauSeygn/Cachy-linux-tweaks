@@ -25,3 +25,13 @@ paru -S kdenetwork-filesharing fuse2 kio-admin khelpcenter sshfs kcmutils5 icout
 # 6. shows you some missing things in kde settings (such as s.m.a.r.t. monitor)
 # 7. lets you manipulate icons off binary files
 # (helpful for extracting icons out of .exe files)
+
+# If you want to use ssh to connect, the service needs to be enabled,
+# you would thus run:
+
+systemctl enable --now sshd
+
+# Without the '--now' flag you either need to restart or run that but with
+# the start argument. Make sure to modify ufw accordingly
+# (I prefer disabling the firewall entirely as it's cumbersome and I'm not
+# running a server).
