@@ -7,7 +7,7 @@ sudo EDITOR=nano visudo
 
 # To entirely disable password prompts when running sudo
 # (note that my username is banana308, substitute with yours naturally),
-# locale the following:
+# locate the following:
 
 # ---------------------------------------
 ## Read drop-in files from /etc/sudoers.d
