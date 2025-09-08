@@ -47,7 +47,7 @@ qemu-system-x86_64                                                              
 
 # '-m 12G' means 12GB of RAM
 
-# '-net user,hostfwd=tcp::2222-:22' means the port 22 is being forwarded from the host to the vm
+# '-net user,hostfwd=tcp::2222-:22' means that port 22 is being forwarded from the host to the vm
 # as port 2222, thus if you wanted an ssh connection the vm from some device, you'd do:
 
 ssh -p 2222 vmusername@vmlocalhost
