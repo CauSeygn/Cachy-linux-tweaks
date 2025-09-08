@@ -5,6 +5,7 @@
 # Mouse & touchpad -> screen edges -> disable everything
 # Keyboard -> delay: 300ms, rate: 50 repeats/s
 # Accessibility -> shake cursor: disabled
+# Wi-fi & internet -> firewall: disabled
 # Colors & themes -> be original and change these yourself
 # Text & fonts -> fonts -> fonts: inter, subpixel: none, hinting: full
 # Notifications -> dnd mode: only while fullscreen app is focused
