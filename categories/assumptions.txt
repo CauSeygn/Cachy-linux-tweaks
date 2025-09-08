@@ -1,0 +1,6 @@
+0. you're on cachy os
+1. you picked limine bootloader during install
+2. you picked btrfs during install
+3. you picked kde during install
+4. you picked fish shell during install
+5. you actually installed it
