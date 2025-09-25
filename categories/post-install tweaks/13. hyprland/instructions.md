@@ -37,11 +37,6 @@ Place whichever component in here that you are going to use into `~.config/` and
 ### Now that you are in Hyprland
 Open a terminal with `Alt + q` and type:
 ```sh
-kbuildsycoca5 && kbuildsycoca6
-```
-This is to populate your apps in things like Dolphin `Open With...` context menu. You only have to run this once, and never again.\
-After that, type:
-```sh
 qt6ct
 ```
 and customize the look and feel of QT (KDE) apps. To do the same with GTK apps, take a look at Hyprland wiki or something, idc about GTK (the provided config simply prefers dark theme on GTK4 and does best-effort on GTK2/3).
