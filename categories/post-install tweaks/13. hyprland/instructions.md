@@ -1,5 +1,5 @@
 # Preface
-This is an opinionated install, but clean of garbage configs that you'd have to hunt down, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation.
+This is an opinionated install, but clean of garbage configs that you'd have to hunt down, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different launcher to what Noctalia provides, if you want it however, take a look at its wiki.
 # Files modified (for easy cleanup)
 `~.config/hypr/*`\
 `~.config/xdg-desktop-portal/`\
@@ -16,7 +16,7 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland noctalia-shell cliphist wl-clipboard matugen-bin kitty qt5ct qt6ct-kde archlinux-xdg-menu sherlock-launcher-bin xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker hyprsysteminfo yazi hyprshot
+paru -S hyprland noctalia-shell cliphist wl-clipboard matugen-bin kitty qt5ct-kde qt6ct-kde sherlock-launcher-bin xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker hyprsysteminfo yazi hyprshot
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `noctalia-shell`'s dependencies).
 
@@ -31,7 +31,7 @@ grep -i 'yourlanguage' /usr/share/X11/xkb/rules/base.lst
 ```
 For me, this prints out the keycode `rs` and the variant that i want `latin`, so for me i would input `kb_layout = rs` & `kb_variant = latin` into `~.config/hypr/config/input.conf` to apply it.
 ### Third
-Place whichever component in here that you are going to use into `~.config/` and give the configs are read-through to familiarize yourself.
+Place whichever component in here that you are going to use into `~.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf`.
 ## Now you can reboot into Hyprland
 (I trust you copied everything provided, otherwise you're on your own.)
 ### Now that you are in Hyprland
@@ -39,5 +39,11 @@ Open a terminal with `Alt + q` and type:
 ```sh
 qt6ct
 ```
-and customize the look and feel of QT (KDE) apps. To do the same with GTK apps, take a look at Hyprland wiki or something, idc about GTK (the provided config simply prefers dark theme on GTK4 and does best-effort on GTK2/3).
+and customize the look and feel of QT6 (KDE) apps. Once you're done, repeat, but this time:
+```sh
+qt5ct
+```
+and customize the look and feel of QT5 (KDE) apps. To do the same with GTK apps, take a look at Hyprland wiki or something, idc about GTK (the provided config simply prefers dark theme on GTK4 and does best-effort on GTK2/3).
 # From here on feel free to customize things yourself.
+### https://wiki.hypr.land/
+### https://docs.noctalia.dev/docs/
