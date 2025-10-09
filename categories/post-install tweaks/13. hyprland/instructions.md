@@ -33,7 +33,7 @@ grep -i 'yourlanguage' /usr/share/X11/xkb/rules/base.lst
 ```
 For me, this prints out the keycode `rs` and the variant that i want `latin`, so for me i would input `kb_layout = rs` & `kb_variant = latin` into `~.config/hypr/config/input.conf` to apply it.
 ### Third
-Place whichever component in here that you are going to use into `~.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf` and, if you use multiple monitors, `window_and_layer_rules.conf`.
+Place whichever component in here that you are going to use into `~.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf` and, if you use multiple monitors, `window_and_layer_rules.conf`. If your GPU is not nVidia, make sure to also remove the last two lines in `environment_variables.conf`.
 ## Now you can reboot into Hyprland
 (I trust you copied everything provided, otherwise you're on your own.)
 ### Now that you are in Hyprland
