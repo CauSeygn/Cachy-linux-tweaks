@@ -1,13 +1,12 @@
 # Preface
 This is an opinionated install, but clean of garbage configs that you'd have to hunt down, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different launcher to what Noctalia provides, if you want it however, take a look at its wiki.
-# Files modified (for easy cleanup)
+# Directories modified manually (for easy cleanup)
 `~/.config/hypr/*`\
 `~/.config/xdg-desktop-portal/`\
-`~/.config/noctalia/`\
-`~/.config/sherlock/`\
 `~/.config/flameshot/`\
-`~/.face/`\
-`~/Pictures/Wallpapers/`
+`~/.face/` (profile pics go here)\
+`~/Pictures/Wallpapers/` (wallpapers go here)\
+`~/.local/share/icons/default/index.theme` (XWayland cursor)
 
 ## Install Hyprland
 First, update your system with:
@@ -50,6 +49,8 @@ and customize the look and feel of QT5 (KDE) apps. To do the same with GTK apps:
 nwg-look
 ```
 and customize the look and feel of GTK apps. Alternatively re-log back into KDE and change GTK looks there.
+
+If you want to change the cursor theme, you have to do so in both the hyprland `input.conf` config, as well as in `~/.local/share/icons/default/index.theme` (for XWayland apps).
 # From here on feel free to customize things yourself.
 ### https://wiki.hypr.land/
 ### https://docs.noctalia.dev/docs/
