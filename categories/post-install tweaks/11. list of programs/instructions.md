@@ -1,4 +1,5 @@
-# This is my list of programs, which I use on Linux
+# Preface
+This is my list of programs, which I use on Linux
 ###### (general windows gaming is not mentioned, naturally I use what is outlined in [8. windows support](../8.%20windows%20support/instructions.md)):
 
 - Browser: brave

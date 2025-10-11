@@ -1,4 +1,4 @@
-# To search for specific packages
+# Search for specific packages:
 You can use either paru or pacman, the syntax is the same, I prefer paru.
 
 ```sh
@@ -19,8 +19,7 @@ paru -Qi nameofpackage
 paru -Qii nameofpackage
 ```
 
-# To search for packages foreign to pacman
-
+# To search for packages foreign to pacman:
 Such as AUR packages, you would do:
 
 ```sh
@@ -35,7 +34,7 @@ paru -Qlq nameofpackage | grep -v '/$'
 
 This will list out all the directories and files that specific package has created.
 
-# To set an already installed package as explicitly installed
+# To set an already installed package as explicitly installed:
 (perhaps another package installed it as a dependency but you like or need that package), you would do:
 
 ```sh

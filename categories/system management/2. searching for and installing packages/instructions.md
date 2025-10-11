@@ -1,5 +1,4 @@
-# To search for specific packages
-
+# Search for specific packages:
 You can use either paru or pacman, the syntax is the same, I prefer paru as it's preinstalled and has some QOL.
 
 ```sh
@@ -20,7 +19,7 @@ paru -Si nameofpackage
 paru -Sii nameofpackage
 ```
 
-# To install packages
+# To install packages:
 
 You have two methods with pacman, three with paru, the first is:
 
@@ -28,7 +27,8 @@ You have two methods with pacman, three with paru, the first is:
 paru -S nameofpackage
 ```
 
-The name must be correct in this case.
+The name must be correct in this case.\
+(Note: you can also specify a repo - example: `aur/nameofpackage`)
 
 The second (paru-specific) is:
 

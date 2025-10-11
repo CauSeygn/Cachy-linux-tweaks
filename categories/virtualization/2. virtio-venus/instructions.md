@@ -1,10 +1,10 @@
 # Virtio-venus
 Is a 3D accelerated driver that works in Linux and android virtual machines. To use it, the virtual machine needs to be in a user session and not the root one. If you know how to create such a vm in qemu-cli then skip to the end.
 
-# If not
+## If not
 Then open up virt-manager and click on `file -> add connection... -> qemu/kvm user session`. Create a virtual machine regularly (override any settings that are defaulting to outdated things to virtio) and install the OS, then close out of virt-manager.
 
-# Example:
+### Example:
 - Chipset: Q35
 - Firmware: UEFI
 - CPU: passthrough
@@ -39,7 +39,7 @@ qemu-system-x86_64                                                              
     -drive file=.local/share/libvirt/images/archlinux.qcow2
 ```
 
-# To explain:
+## To explain:
 
 - `-smp 6` means 6 cpu cores
 - `-m 12G` means 12GB of RAM
@@ -56,4 +56,4 @@ ssh -p 2222 vmusername@vmlocalhost
 - `-drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/x64/OVMF_CODE.secboot.4m.fd` this is the bios file for the vm, this is just the path to it.
 - `-drive if=pflash,format=raw,file=.config/libvirt/qemu/nvram/archlinux_VARS.fd` this is the nvram of the vm, without this or with this set to read-only, the vm won't run.
 - `-drive file=.local/share/libvirt/images/archlinux.qcow2` this is the path to the qcow2 file (the storage of the vm).\
-You can see my audio device isn't `ich9` in this case but `pipewire`, this is irrelevant.
+(You can see my audio device isn't `ich9` in this case but `pipewire`, this is irrelevant.)

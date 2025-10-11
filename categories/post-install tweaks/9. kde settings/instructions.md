@@ -1,4 +1,5 @@
-# This is just a list of some settings I tweak for myself, for appearance and everything not listed here feel free to do those yourself.
+# Preface
+This is just a list of some settings I tweak for myself, for appearance and everything not listed here feel free to do those yourself.
 
 - Burger menu -> highlight changed settings
 - Mouse & touchpad -> screen edges -> disable everything

@@ -1,4 +1,6 @@
-# This will change the default cpu governor from automanaged to manually managed
+# Preface
+This will change the default cpu governor from automanaged to manually managed.
+
 ## Tweak the following line:
 
 ```sh
@@ -14,7 +16,8 @@ systemctl enable cpupower.service
 
 either line by line, or at once (newlining things are treated as separate commands, go read more on that if you want, other things such as `command1 && command2` also work).
 
-## If your CPU is AMD, then additionally edit `/etc/default/limine`, to include:
+## If your CPU is AMD:
+then additionally edit `/etc/default/limine`, to include:
 
 `amd_pstate=passive`
 

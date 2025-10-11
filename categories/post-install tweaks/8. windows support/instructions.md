@@ -1,4 +1,5 @@
-# To use (most) Windows applications/play games, you just need to install the gaming meta-package (easiest way):
+# Preface
+To use (most) Windows applications/play games, you just need to install the gaming meta-package (easiest way):\
 In application menu open: `Cachy Hello -> Apps/Tweaks -> Install Gaming packages`.
 
 This will install everything from wine to steam to lutris to heroic... you get the point.
@@ -6,16 +7,13 @@ This will install everything from wine to steam to lutris to heroic... you get t
 # Wine specific things I use:
 
 # Winetricks
-
-Open Menu Editor from the Application Menu and navigate to the Winetricks
-entry. In the Command-line arguments field, add:
+Open Menu Editor from the Application Menu and navigate to the Winetricks entry. In the Command-line arguments field, add:
 
 ```sh
 --gui=zenity
 ```
 
-And save and exit. Now you can use winetricks in a gui that has visual
-feedback and will prevent it defaulting to the other, awful one.
+And save and exit. Now you can use winetricks in a gui that has visual feedback and will prevent it defaulting to the other, awful one.
 
 Before getting into specifics, generate your wine prefix by running:
 
@@ -23,8 +21,7 @@ Before getting into specifics, generate your wine prefix by running:
 winecfg
 ```
 
-In the terminal from anywhere.
-Then from the app menu run winetricks -> default prefix.
+In the terminal from anywhere. Then from the app menu run `winetricks -> default prefix`.
 
 Here, you want to go to install a windows dll or component and tick:
 
@@ -72,7 +69,7 @@ Aside from a few corrupt ones (I don't recall which, sorry, just use the list) y
 paru -S ttf-ms-fonts
 ```
 
-Now your system has all those fonts as well (hunt down duplicates in kde settings -> text & fonts -> font management -> find duplicates).
+Now your system has all those fonts as well (hunt down duplicates in `kde settings -> text & fonts -> font management -> find duplicates`).
 
 # Proton
 You may notice some games or programs won't run, or run poorly in just wine, but run in proton. Throw those into Lutris/Heroic Launcher/umu-launcher/Steam/whatever you like.\

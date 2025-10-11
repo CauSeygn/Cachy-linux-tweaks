@@ -1,5 +1,6 @@
 # Preface
 This is an opinionated install, but clean of garbage configs that you'd have to hunt down, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different launcher to what Noctalia provides, if you want it however, take a look at its wiki.
+
 # Directories modified manually (for easy cleanup)
 `~/.config/hypr/*`\
 `~/.config/xdg-desktop-portal/`\
@@ -16,7 +17,7 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland noctalia-shell cliphist wl-clipboard matugen-bin kitty qt5ct-kde qt6ct-kde sherlock-launcher-bin xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse clipse-gui
+paru -S hyprland quickshell-git noctalia-shell-git cliphist wl-clipboard matugen-bin kitty qt5ct-kde qt6ct-kde sherlock-launcher-bin xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse clipse-gui
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `noctalia-shell`'s dependencies).
 Note that you may also want `nwg-look` to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
@@ -39,6 +40,7 @@ If you use chromium-based browsers with `kwallet`, consider either not using kwa
 --password-store=basic
 ```
 flag. (you will need to re-log into sites, and import passwords, but only once, instead of whenever kwallet feels like shit)
+
 ## Now you can reboot into Hyprland
 (I trust you copied everything provided, otherwise you're on your own.)
 ### Now that you are in Hyprland
@@ -57,6 +59,7 @@ nwg-look
 and customize the look and feel of GTK apps. Alternatively re-log back into KDE and change GTK looks there.
 
 If you want to change the cursor theme, you have to do so in both the hyprland `input.conf` config, as well as in `~/.local/share/icons/default/index.theme` (for XWayland apps).
+
 # From here on feel free to customize things yourself.
 ### https://wiki.hypr.land/
 ### https://docs.noctalia.dev/docs/

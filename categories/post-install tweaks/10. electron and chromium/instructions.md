@@ -1,5 +1,8 @@
-# Note: chromium now launches in native wayland, electron still doesn't
-# These things often run in XWayland and thus poorly (on wayland), to override that, launch the program as (in this case let's use freetube, an electron app):
+# Note:
+chromium now launches in native wayland, electron still doesn't
+
+# Preface
+These things often run in XWayland and thus poorly (on Wayland), to override that, launch the program as (in this case let's use freetube, an electron app):
 
 ```sh
 freetube --ozone-platform-hint=wayland --ozone-platform=wayland
@@ -10,7 +13,8 @@ freetube --ozone-platform-hint=wayland --ozone-platform=wayland
 - Program: `/usr/bin/freetube`
 - Command-line arguments: `--ozone-platform-hint=wayland --ozone-platform=wayland %U`
 
-## Alternatively, you can make a file in `~/.config/` named `electron.flags` and put:
+## Alternatively
+you can make a file in `~/.config/` named `electron.flags` and put:
 
 ```sh
 --ozone-platform-hint=wayland
