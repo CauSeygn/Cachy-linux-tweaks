@@ -8,6 +8,7 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 `~/.face/` (profile pics go here)\
 `~/Pictures/Wallpapers/` (wallpapers go here)\
 `~/.local/share/icons/default/index.theme` (XWayland cursor)
+`~/Mouse Accel Profile/` (python script for pointer accel)
 
 ## Install Hyprland
 First, update your system with:
