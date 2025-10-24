@@ -1,0 +1,11 @@
+[mgr]
+linemode = "size_and_mtime"
+show_hidden = true
+
+[preview]
+max_width = 900
+max_height = 1300
+image_filter = "lanczos3"
+
+[input]
+cursor_blink = true

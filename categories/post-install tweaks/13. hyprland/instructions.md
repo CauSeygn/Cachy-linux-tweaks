@@ -5,9 +5,17 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 `~/.config/hypr/*`\
 `~/.config/xdg-desktop-portal/`\
 `~/.config/flameshot/`\
+`~/.config/gtk-3.0/*` (theming start)\
+`~/.config/gtk-4.0/*`\
+`~/.config/qt5ct/`\
+`~/.config/qt6ct/` (theming end)\
+`~/.config/kitty/`\
+`~/.config/sherlock/`\
 `~/.face/` (profile pics go here)\
 `~/Pictures/Wallpapers/` (wallpapers go here)\
-`~/.local/share/icons/default/index.theme` (XWayland cursor)
+`~/.local/share/icons/default/index.theme` (XWayland cursor)\
+`~/.local/share/applications/yazi.desktop` (run yazi in kitty)\
+`~/.local/share/color-schemes/EmeraldDarkCopy.colors` (theme)\
 `~/Mouse Accel Profile/` (python script for pointer accel)
 
 ## Install Hyprland
@@ -35,6 +43,8 @@ grep -i 'yourlanguage' /usr/share/X11/xkb/rules/base.lst
 For me, this prints out the keycode `rs` and the variant that i want `latin`, so for me i would input `kb_layout = rs` & `kb_variant = latin` into `~.config/hypr/config/input.conf` to apply it.
 ### Third
 Place whichever component in here that you are going to use into `~.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf` and, if you use multiple monitors, `window_and_layer_rules.conf`. If your GPU is not nVidia, make sure to also remove the last two lines in `environment_variables.conf`.
+
+If you don't want to theme things yourself, copy the theme related things at the top and in `qt5ct.conf` & `qt6ct.conf` change the paths to your username.
 ### Fourth
 If you use chromium-based browsers with `kwallet`, consider either not using kwallet or making your browser launch with the (__FIRST EXPORT PASSWORDS!__):
 ```sh
