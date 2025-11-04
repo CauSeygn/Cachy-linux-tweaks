@@ -75,3 +75,22 @@ Now your system has all those fonts as well (hunt down duplicates in `kde settin
 You may notice some games or programs won't run, or run poorly in just wine, but run in proton. Throw those into Lutris/Heroic Launcher/umu-launcher/Steam/whatever you like.\
 Likewise in Steam, you can use Protontricks.\
 Check [ProtonDB](https://www.protondb.com), [Are We Anti-Cheat Yet?](https://areweanticheatyet.com), [WineHQ](https://winehq.com) for compatibility, or just test it yourself.
+
+# Making an application launch in its group
+Whether you make your game's .desktop entry in KDE's Menu Editor or auto-generating it in Lutris, you will note that running it won't group windows if you run multiple instances of it.
+
+To fix this, navigate to `~/.local/share/applications/` and find your `game or program.desktop`. Open it in your favorite editor and add the following anywhere under `[Desktop Entry]`:
+
+```sh
+StartupWMClass=name of the exe file.exe
+```
+(The example above uses spaces deliberately to showcase that you do not need any special syntax for exe files with spaces.)
+
+For example, for AIMP:
+
+```sh
+StartupWMClass=AIMP.exe
+```
+now your program/game will be grouped, and fix other minor issues (such as a missing icon in window managers when using [Noctalia](../13.%20hyprland/)).
+
+#### Note that this is not exclusive to Windows' games/programs, you may also do this for Linux native apps if they miss this, simply input the name of the binary.
