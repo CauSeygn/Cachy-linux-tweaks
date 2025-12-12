@@ -11,7 +11,7 @@ To look like this:
 BUILDENV=(!distcc color !ccache !check !sign)
 ```
 
-## Or, open the terminal and do:
+## Or, open the terminal here and do:
 
 ```sh
 sudo cp makepkg.conf /etc/

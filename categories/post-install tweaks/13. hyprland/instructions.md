@@ -50,7 +50,7 @@ If you don't want to theme things yourself, copy the theme related things at the
 If you use chromium-based browsers or electron apps (such as VS Code) with `kwallet`:
 
 1. Make it so the last app exiting doesn't close the wallet, in the wallet settings or if you have the kcm package for it, in kde settings.
-2. In `~/.config/MakeSureYouPutTheCorrectChromiumBrowserNameHere-flags.conf`, `~/.config/code-flags.conf` and `~/.config/WhateverOtherElectronAppYouMayHaveWhichUsesLibsecrets-flags.conf`:
+2. In `~/.config/MakeSureYouPutTheCorrectChromiumBrowserNameHere-flags.conf`, `~/.config/code-flags.conf` and `~/.config/WhateverOtherElectronAppYouMayHaveWhichUsesLibsecrets-flags.conf` or `~/.config/electronVersionOmissable-flags.conf` (electron34-flags.conf, electron-flags.conf; I don't recommend using it globally like this, for electron apps if they provide config files specific to them use those, otherwise put the following in their [launch arguments](../10.%20electron%20and%20chromium/instructions.md)):
 ```sh
 --password-store=kwallet6
 ```

@@ -53,21 +53,21 @@ function fish_prompt
         if functions -q fish_is_root_user; and fish_is_root_user
                 set_color -o red
         else
-                set_color -o yellow
+                set_color -o FF9933
         end
     
         echo -n $USER
-        set_color -o white
+        set_color -o 8800CC
         echo -n @
     
         if test -z "$SSH_CLIENT"
-                set_color -o blue
+                set_color -o 00AA83
         else
                 set_color -o cyan
         end
     
         echo -n (prompt_hostname)
-        set_color -o white
+        set_color -o 998877
         echo -n :(prompt_pwd -D 6)
         set_color -o green
         echo -n ']'

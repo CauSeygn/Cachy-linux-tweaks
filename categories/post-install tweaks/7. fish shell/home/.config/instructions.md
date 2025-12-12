@@ -1,5 +1,5 @@
 # Preface
-These are my fish shell binds and prompt, to use them simply copy them to their expected location.
+These are my fish shell binds and prompt, to use any of them (`printtime` function requires the line in `config.fish`) simply copy them to their expected location.
 
 ## Konsole
 If you use Konsole, the `Shift+Right`, `Shift+Left` binds likely won't work.\
