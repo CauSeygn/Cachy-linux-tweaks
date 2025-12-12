@@ -1,5 +1,5 @@
 # Preface
-This is an opinionated install, but clean of garbage configs that you'd have to hunt down, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different launcher to what Noctalia provides, if you want it however, take a look at its wiki.
+This is an opinionated install, but clean of garbage configs that you'd have to hunt down as I list every manually modified directory, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different launcher and clipboard manager (`sherlock` and `clipse`) to what Noctalia provides, but provide both, thus if you want to use the builtin ones then take a look at its wiki and omit these three packages.
 
 # Directories modified manually (for easy cleanup)
 `~/.config/hypr/*`\
@@ -13,9 +13,10 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 `~/.config/sherlock/`\
 `~/.face/` (profile pics go here)\
 `~/Pictures/Wallpapers/` (wallpapers go here)\
-`~/.local/share/icons/default/index.theme` (XWayland cursor)\
+`~/.local/share/icons/default/index.theme` (XWayland cursor example)\
 `~/.local/share/applications/yazi.desktop` (run yazi in kitty)\
 `~/.local/share/color-schemes/EmeraldDarkCopy.colors` (theme)\
+`~/.local/share/dbus-1/services/org.freedesktop.secrets.service` (KWallet shenanigans)\
 `~/Mouse Accel Profile/` (python script for pointer accel)
 
 ## Install Hyprland
@@ -26,7 +27,7 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland quickshell-git noctalia-shell-git cliphist wl-clipboard matugen-bin kitty qt5ct-kde qt6ct-kde sherlock-launcher-bin xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse clipse-gui
+paru -S hyprland quickshell-git noctalia-shell-git cava cliphist wl-clipboard matugen-bin kitty qt5ct-kde qt6ct-kde sherlock-launcher-bin xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse clipse-gui
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `noctalia-shell`'s dependencies).
 Note that you may also want `nwg-look` to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
@@ -40,17 +41,29 @@ Find your keyboard layout if it's different from English (US):
 ```sh
 grep -i 'yourlanguage' /usr/share/X11/xkb/rules/base.lst
 ```
-For me, this prints out the keycode `rs` and the variant that i want `latin`, so for me i would input `kb_layout = rs` & `kb_variant = latin` into `~.config/hypr/config/input.conf` to apply it.
+For me, this prints out the keycode `rs` and the variant that i want `latin`, so for me i would input `kb_layout = rs` & `kb_variant = latin` into `~/.config/hypr/config/input.conf` to apply it.
 ### Third
-Place whichever component in here that you are going to use into `~.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf` and, if you use multiple monitors, `window_and_layer_rules.conf`. If your GPU is not nVidia, make sure to also remove the last two lines in `environment_variables.conf`.
+Place whichever component in here that you are going to use into `~/.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf` and, if you use multiple monitors, `window_and_layer_rules.conf`. If your GPU is not nVidia, make sure to also remove the last two lines in `environment_variables.conf`.
 
 If you don't want to theme things yourself, copy the theme related things at the top and in `qt5ct.conf` & `qt6ct.conf` change the paths to your username.
 ### Fourth
-If you use chromium-based browsers with `kwallet`, consider either not using kwallet or making your browser launch with the (__FIRST EXPORT PASSWORDS!__):
+If you use chromium-based browsers or electron apps (such as VS Code) with `kwallet`:
+
+1. Make it so the last app exiting doesn't close the wallet, in the wallet settings or if you have the kcm package for it, in kde settings.
+2. In `~/.config/MakeSureYouPutTheCorrectChromiumBrowserNameHere-flags.conf`, `~/.config/code-flags.conf` and `~/.config/WhateverOtherElectronAppYouMayHaveWhichUsesLibsecrets-flags.conf`:
 ```sh
---password-store=basic
+--password-store=kwallet6
 ```
-flag. (you will need to re-log into sites, and import passwords, but only once, instead of whenever kwallet feels like shit)
+alternatively for VS Code, in `~/.vscode/argv.json` add:
+```json
+"password-store": "kwallet6"
+```
+wherever you like into the {} enclosure, surely you know json syntax?
+#### (this config provides a `brave-flags.conf` in its correct path as an example, there's no need to copy this over if you don't use Brave)
+
+3. Naturally for autologin, your KWallet password should be passwordless, or mess with `pam_autologin` from the aur, following the arch wiki pam page if you want passworded autologin unlocks.
+### Fifth
+As in the third step, run through the things located outside of `~/.config/` and place them where they are shown to be (creating paths that don't exist beforehand).
 
 ## Now you can reboot into Hyprland
 (I trust you copied everything provided, otherwise you're on your own.)
