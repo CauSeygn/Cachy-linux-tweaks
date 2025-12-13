@@ -3,6 +3,7 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 
 # Directories modified manually (for easy cleanup)
 `~/.config/hypr/*`\
+`~/.config/systemd/user/*` (user systemd files for the wm and noctalia)\
 `~/.config/xdg-desktop-portal/`\
 `~/.config/flameshot/`\
 `~/.config/gtk-3.0/*` (theming start)\
@@ -64,6 +65,11 @@ wherever you like into the {} enclosure, surely you know json syntax?
 3. Naturally for autologin, your KWallet password should be passwordless, or mess with `pam_autologin` from the aur, following the arch wiki pam page if you want passworded autologin unlocks.
 ### Fifth
 As in the third step, run through the things located outside of `~/.config/` and place them where they are shown to be (creating paths that don't exist beforehand).
+### Sixth
+Open a terminal and type:
+```sh
+systemctl --user enable noctalia.service hyprpolkitagent.service
+```
 
 ## Now you can reboot into Hyprland
 (I trust you copied everything provided, otherwise you're on your own.)
