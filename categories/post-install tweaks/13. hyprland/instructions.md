@@ -68,7 +68,8 @@ As in the third step, run through the things located outside of `~/.config/` and
 ### Sixth
 Open a terminal and type:
 ```sh
-systemctl --user enable noctalia.service hyprpolkitagent.service
+systemctl --user add-wants hyprland-session.target noctalia.service 
+systemctl --user add-wants hyprland-session.target hyprpolkitagent.service
 ```
 
 ## Now you can reboot into Hyprland
