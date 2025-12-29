@@ -79,11 +79,11 @@ Open a terminal with `Win|Super + q` and type:
 ```sh
 qt6ct
 ```
-and customize the look and feel of QT6 (KDE) apps. Once you're done, repeat, but this time:
+and customize the look and feel of QT6 (KDE) apps. Make sure that for `Standard dialogs` in general tab, you select `XDG Desktop Portal`. Once you're done, repeat, but this time:
 ```sh
 qt5ct
 ```
-and customize the look and feel of QT5 (KDE) apps. To do the same with GTK apps:
+and customize the look and feel of QT5 (KDE) apps. Make sure that for `Standard dialogs` in general tab, you select `XDG Desktop Portal`. To do the same with GTK apps:
 ```sh
 nwg-look
 ```
