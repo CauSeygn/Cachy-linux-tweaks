@@ -91,6 +91,11 @@ and customize the look and feel of GTK apps. Alternatively re-log back into KDE 
 
 If you want to change the cursor theme, you have to do so in both the hyprland `input.conf` config, as well as in `~/.local/share/icons/default/index.theme` (for XWayland apps).
 
+I suggest restarting Noctalia with:
+```sh
+killall kded6 && systemctl --user restart noctalia.service || systemctl --user restart noctalia.service
+```
+you can make this a custom button in the bar menu. If you neglect to kill `kded6` and it is running, your tray will get hijacked. Likewise if it is not running, the first command will error out and do nothing, which is why the conditional exists.
 # From here on feel free to customize things yourself.
 ### https://wiki.hypr.land/
 ### https://docs.noctalia.dev/docs/
