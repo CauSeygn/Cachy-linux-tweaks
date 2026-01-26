@@ -3,33 +3,34 @@ This is my list of programs, which I use on Linux
 ###### (general windows gaming is not mentioned, naturally I use what is outlined in [8. windows support](../8.%20windows%20support/instructions.md)):
 
 - Browser: brave
-- Music player: aimp (wine)
+- Music player: aimp (wine), audacious
 - Video player: haruna
 - Image viewer: gwenview
-- File manager: dolphin
+- File manager: dolphin, yazi
 - YouTube client: freetube
 - Calculator: qalculate (qt)
 - Image editing: aseprite, gimp, inkscape, krita, pixi-editor
 - Screenshotting: spectacle (kde), flameshot (hyprland)
 - 3d modeling: blender
-- Video recording: obs
-- Archive manager: 7-zip (wine, others have issues dealing with jis)
-- Terminal: konsole
+- Video recording: obs, gpu-screen-recorder
+- Archive manager: 7-zip (wine, native Linux ones have issues dealing with jis)
+- Terminal: konsole, kitty
 - Text editor: kate, micro, vscode (not vscodium), nano
 - Office suite: onlyoffice
-- Alarm: kalarm
+- Alarm: kalarm (kde), timer (noctalia plugin, hyprland)
 - Virtual machines: qemu, virt-manager (check ufw or disable it)
 - Android emulator: genymotion (check ufw or disable it)
 - Emulators: pcsx2, rpcs3, ppsspp
 - GPU fan curve control: lact
-- Weather widget: weather widget plus (kde)
+- Weather widget: weather widget plus (kde), in-built noctalia weather display (hyprland)
 - Phone<->PC connectivity: kde connect (check ufw or disable it), samba, material files (android), wormhole-rs
 - PC<->PC connectivity:samba, wormhole-rs
 - File searching and indexing: fsearch
 - System monitoring: btop, mission control, cpu-x, nvtop, nvitop (nvidia)
-- Diff program: kompare, meld
+- Diff program: meld
+- Project diff generator: kompare
 - Remote access: rustdesk (check ufw or disable it)
-- Messaging: signal desktop
+- Messaging, calls: signal desktop
 - Audio routing: qpwgraph
 - Image upscaling: upscayl
 - FFmpeg frontend: videomass

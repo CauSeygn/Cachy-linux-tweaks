@@ -28,10 +28,10 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland quickshell-git noctalia-shell-git cava cliphist wl-clipboard matugen-bin kitty qt5ct-kde qt6ct-kde sherlock-launcher-bin xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse clipse-gui
+paru -S hyprland quickshell-git noctalia-shell-git cava cliphist wl-clipboard kitty qt5ct-kde qt6ct-kde sherlock-launcher-bin xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse clipse-gui dconf-editor
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `noctalia-shell`'s dependencies).
-Note that you may also want `nwg-look` to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
+Note that you may also want `nwg-look` (theming) and `dconf-editor` (other stuff such as removing menu buttons, for example) to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
 
 ## Once that is done
 There are a few things to do before going into Hyprland.
@@ -87,7 +87,11 @@ and customize the look and feel of QT5 (KDE) apps. Do not touch dialogs here. To
 ```sh
 nwg-look
 ```
-and customize the look and feel of GTK apps. Alternatively re-log back into KDE and change GTK looks there.
+and customize the look and feel of GTK apps. Alternatively re-log back into KDE and change GTK looks there. Finally:
+```sh
+dconf-editor
+```
+and customize the look and feel of GTK apps (take your time to explore the options or don't).
 
 If you want to change the cursor theme, you have to do so in both the hyprland `input.conf` config, as well as in `~/.local/share/icons/default/index.theme` (for XWayland apps).
 

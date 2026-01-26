@@ -21,4 +21,4 @@ DO NOT install (using paru -S) anything because your database is now out of sync
 ```sh
 sudo -EH DIFFPROG=meld pacdiff
 ```
-#### afterwards, and __carefully__ go through the list and merge or discard any changes, one by one.
+#### afterwards, and __carefully__ go through the list and merge or discard any changes, one by one. If you see any `.pacsave` output, then a config has migrated and you should check where to and update it there, then remove the old config file.

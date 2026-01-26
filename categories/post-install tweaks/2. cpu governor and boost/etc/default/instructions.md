@@ -10,7 +10,7 @@ governor='performance'
 to whichever profile you want, afterwards open terminal here and run:
 
 ```sh
-sudo cp cpupower /etc/default/cpupower
+sudo cp cpupower-service.conf /etc/default/cpupower-service.conf
 systemctl enable cpupower.service
 ```
 
