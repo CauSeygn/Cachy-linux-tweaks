@@ -1,5 +1,5 @@
 # Preface
-This is an opinionated install, but clean of garbage configs that you'd have to hunt down as I list every manually modified directory, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different launcher and clipboard manager (`sherlock` and `clipse`) to what Noctalia provides, but provide both, thus if you want to use the builtin ones then take a look at its wiki and omit these three packages.
+This is an opinionated install, but clean of garbage configs that you'd have to hunt down as I list every manually modified directory, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different clipboard manager (`clipse`) to what Noctalia provides, but provide both, thus if you want to use the builtin one then take a look at its wiki and omit these two packages.
 
 # Directories modified manually (for easy cleanup)
 `~/.config/hypr/*`\
@@ -11,7 +11,6 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 `~/.config/qt5ct/`\
 `~/.config/qt6ct/` (theming end)\
 `~/.config/kitty/`\
-`~/.config/sherlock/`\
 `~/.face/` (profile pics go here)\
 `~/Pictures/Wallpapers/` (wallpapers go here)\
 `~/.local/share/icons/default/index.theme` (XWayland cursor example)\
@@ -28,7 +27,7 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland quickshell-git noctalia-shell-git cava cliphist wl-clipboard kitty qt5ct-kde qt6ct-kde sherlock-launcher-bin xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse clipse-gui dconf-editor
+paru -S hyprland quickshell-git noctalia-shell-git cava cliphist wl-clipboard kitty qt5ct-kde qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse clipse-gui dconf-editor
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `noctalia-shell`'s dependencies).
 Note that you may also want `nwg-look` (theming) and `dconf-editor` (other stuff such as removing menu buttons, for example) to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
