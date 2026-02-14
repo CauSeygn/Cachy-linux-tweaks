@@ -33,3 +33,6 @@ NewsOnUpgrade
 ```
 
 and uncomment them (delete the '#' in front of them). Now you'll get any important unread news from the Arch website, in case of needed interventions, before an upgrade; and your searches will be backward sorted instead of placing the most relevant packages 6000 lines up.
+
+## See also:
+[yay](../../post-install%20tweaks/15.%20yay/instructions.md)

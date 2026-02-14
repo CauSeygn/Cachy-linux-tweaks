@@ -1,5 +1,5 @@
 # Search for specific packages:
-You can use either paru or pacman, the syntax is the same, I prefer paru as it's preinstalled and has some QOL.
+You can use either paru, [yay][def] or pacman, the syntax is the same, I prefer ~~paru as it's preinstalled and~~ yay, as it has some QOL. The following showcases paru, yay is the exact same syntax.
 
 ```sh
 paru -Ss searchquery
@@ -57,3 +57,5 @@ man pacman
 ```sh
 man paru
 ```
+
+man [yay](../../post-install%20tweaks/15.%20yay/instructions.md)
