@@ -1,0 +1,17 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=clipse -listen
+GenericName[en_US]=
+GenericName=
+Icon=kwrite
+MimeType=
+Name[en_US]=Clipse
+Name=Clipse
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

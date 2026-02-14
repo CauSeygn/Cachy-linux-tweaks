@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Usage:
+#
+# Modify the launcher and slice variables, optionally try your hand at filtering stuff
+# in appid before the grep, don't touch anything else
+# once done, place into ~/.local/bin/ and make executable
+# call by running "exec-app somebinary" and/or use it with noctalia's launcher/compositor binds as prefix
+
+# Modify the launcher prefix:
+launcher="noctalia"
+
+# Modify the slice, or sub-slice you want to launch it under:
+slice="desktop.slice"
+
+# Try to guess a sensible ApplicationID, expected end format is:
+#
+# firstword-word-word-...-finalword
+#
+appid=$(printf '%s\n' "$@"                                              \
+    | sed 's/^env\s*//'                                                 \
+    | sed '/^[A-Z_][A-Z0-9_]*=/d'                                       \
+    | sed '/^--[^ ]/d'                                                  \
+    | sed -e "/^start$/d"                                               \
+          -e "/^\/unix$/d"                                              \
+          -e "/^%f$/d"                                                  \
+          -e 's|^'"$HOME"'/[^[:space:]]*\/\(.*\)\.[eE][xX][eE]$|\1|'    \
+    | grep -v '^$'                                                      \
+    | sed '$!s/\([^-\]\)$/\1-/'                                         \
+    | tr -cd '[:alnum:]-'                                               \
+    | tr '[:upper:]' '[:lower:]')
+
+# Generate random instance id (collision-resistant)
+random=$(openssl rand -hex 6)
+
+unit="app-${launcher}-${appid}-${random}"
+
+exec systemd-run --user \
+    --slice="$slice"    \
+    --unit="$unit"      \
+    --scope             \
+    --collect           \
+    -- "$@"

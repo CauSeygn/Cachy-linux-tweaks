@@ -1,0 +1,15 @@
+[Desktop Entry]
+Categories=Utility
+Comment=Systray applet for Cachy-Update
+Exec=arch-update --tray
+Icon=cachy-update_updates-available-blue
+Name=Cachy-Update Systray Applet
+NoDisplay=false
+Path=
+PrefersNonDefaultGPU=false
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

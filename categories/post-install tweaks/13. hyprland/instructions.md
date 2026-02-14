@@ -1,5 +1,5 @@
 # Preface
-This is an opinionated install, but clean of garbage configs that you'd have to hunt down as I list every manually modified directory, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different clipboard manager (`clipse`) to what Noctalia provides, but provide both, thus if you want to use the builtin one then take a look at its wiki and omit these two packages.
+This is an opinionated install, but clean of garbage configs that you'd have to hunt down as I list every manually modified directory, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different clipboard manager (`clipse`) to what Noctalia provides, but provide both, thus if you want to use the builtin one then take a look at its wiki and omit this package.
 
 # Directories modified manually (for easy cleanup)
 `~/.config/hypr/*`\
@@ -13,6 +13,7 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 `~/.config/kitty/`\
 `~/.face/` (profile pics go here)\
 `~/Pictures/Wallpapers/` (wallpapers go here)\
+`~/.local/bin/exec-app` (app launching prefix script)\
 `~/.local/share/icons/default/index.theme` (XWayland cursor example)\
 `~/.local/share/applications/yazi.desktop` (run yazi in kitty)\
 `~/.local/share/color-schemes/EmeraldDarkCopy.colors` (theme)\
@@ -27,7 +28,7 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland quickshell-git noctalia-shell-git cava cliphist wl-clipboard kitty qt5ct-kde qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse clipse-gui dconf-editor
+paru -S hyprland quickshell-git noctalia-shell-git cava cliphist wl-clipboard kitty qt5ct-kde qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse dconf-editor
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `noctalia-shell`'s dependencies).
 Note that you may also want `nwg-look` (theming) and `dconf-editor` (other stuff such as removing menu buttons, for example) to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
@@ -69,12 +70,13 @@ Open a terminal and type:
 ```sh
 systemctl --user add-wants hyprland-session.target noctalia.service 
 systemctl --user add-wants hyprland-session.target hyprpolkitagent.service
+systemctl --user add-wants hyprland-session.target xdg-desktop-autostart.target
 ```
 
 ## Now you can reboot into Hyprland
 (I trust you copied everything provided, otherwise you're on your own.)
 ### Now that you are in Hyprland
-Open a terminal with `Win|Super + q` and type:
+1. Open a terminal with `Win|Super + q` and type:
 ```sh
 qt6ct
 ```
@@ -92,9 +94,16 @@ dconf-editor
 ```
 and customize the look and feel of GTK apps (take your time to explore the options or don't).
 
-If you want to change the cursor theme, you have to do so in both the hyprland `input.conf` config, as well as in `~/.local/share/icons/default/index.theme` (for XWayland apps).
+2. If you want to change the cursor theme, you have to do so in both the hyprland `input.conf` config, as well as in `~/.local/share/icons/default/index.theme` (for XWayland apps).
 
-I suggest restarting Noctalia with:
+3. If you want to autostart programs/scripts, you can use KDE settings autostart to add them in, or add them into the autostart section of the hyprland config. What I personally enable, is provided.
+### Noctalia
+1. Open the settings menu, and go to `Launcher -> Execute`. Tick on `Enable custom launch prefix` and in the field put `exec-app`. This is the prefix that will run everything through SystemD to unhook it from Noctalia/Hyprland and launch it in its own neatly-named scopes. If you wish to edit its functionality, simply open it (`~/.local/bin/exec-app`) in a text editor, as it is a bash script.
+#### (flatpaks, snaps and appimages are untested, if you have issues, then make your prefix be: `systemd-run --user --scope --collect` instead, and add `--` into Hyprland config additionally, so: `prefix -- binary`)
+
+2. Next, navigate to `Plugins -> Available` and install `Keybind Cheatsheet`, then press `Win|Super + h` so you can easily view your keybinds.
+
+3. I suggest restarting Noctalia with:
 ```sh
 killall kded6 && systemctl --user restart noctalia.service || systemctl --user restart noctalia.service
 ```

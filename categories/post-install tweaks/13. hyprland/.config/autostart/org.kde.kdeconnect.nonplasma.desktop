@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=Qt;KDE;Network;
+Comment=Display information about your devices
+Exec=kdeconnect-indicator
+Icon=kdeconnect
+Name=KDE Connect Indicator
+NotShowIn=KDE;
+Terminal=false
+Type=Application
