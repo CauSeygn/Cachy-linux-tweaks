@@ -3,7 +3,7 @@ This is my list of programs, which I use on Linux
 ###### (general windows gaming is not mentioned, naturally I use what is outlined in [8. windows support](../8.%20windows%20support/instructions.md)):
 
 - Browser: brave
-- Music player: aimp (wine), audacious
+- Music player: aimp (wine), audacious, strawberry
 - Video player: haruna
 - Image viewer: gwenview
 - File manager: dolphin, yazi
@@ -31,7 +31,7 @@ This is my list of programs, which I use on Linux
 - Project diff generator: kompare
 - Remote access: rustdesk (check ufw or disable it)
 - Messaging, calls: signal desktop
-- Audio routing: qpwgraph
+- Audio routing: qpwgraph, coppwr
 - Image upscaling: upscayl
 - FFmpeg frontend: videomass
 - Discord client that doesn't suck on linux (and in general): vesktop
