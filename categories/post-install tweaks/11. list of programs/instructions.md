@@ -17,12 +17,12 @@ This is my list of programs, which I use on Linux
 - Terminal: konsole, kitty
 - Text editor: kate, micro, vscode (not vscodium), nano
 - Office suite: onlyoffice
-- Alarm: kalarm (kde), timer (noctalia plugin, hyprland)
+- Alarm: kalarm (kde), dank pomodoro timer (dms plugin, hyprland)
 - Virtual machines: qemu, virt-manager (check ufw or disable it)
 - Android emulator: genymotion (check ufw or disable it)
 - Emulators: pcsx2, rpcs3, ppsspp
 - GPU fan curve control: lact
-- Weather widget: weather widget plus (kde), in-built noctalia weather display (hyprland)
+- Weather widget: weather widget plus (kde), in-built dms weather display (hyprland)
 - Phone<->PC connectivity: kde connect (check ufw or disable it), samba, material files (android), wormhole-rs
 - PC<->PC connectivity:samba, wormhole-rs
 - File searching and indexing: fsearch

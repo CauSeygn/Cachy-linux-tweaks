@@ -91,6 +91,6 @@ For example, for AIMP:
 ```sh
 StartupWMClass=AIMP.exe
 ```
-now your program/game will be grouped, and fix other minor issues (such as a missing icon in window managers when using [Noctalia](../13.%20hyprland/)).
+now your program/game will be grouped, and fix other minor issues (such as a missing icon in window managers when using [DMS](../13.%20hyprland/)).
 
 #### Note that this is not exclusive to Windows' games/programs, you may also do this for Linux native apps if they miss this, simply input the name of the binary.

@@ -4,40 +4,72 @@
 #
 # Modify the launcher and slice variables, optionally try your hand at filtering stuff
 # in appid before the grep, don't touch anything else
-# once done, place into ~/.local/bin/ and make executable
-# call by running "exec-app somebinary" and/or use it with noctalia's launcher/compositor binds as prefix
-
-# Modify the launcher prefix:
-launcher="noctalia"
-
-# Modify the slice, or sub-slice you want to launch it under:
-slice="desktop.slice"
-
-# Try to guess a sensible ApplicationID, expected end format is:
+# once done, save as exec-app (or whatever else you like, just make sure that the name isn't already some
+# other binary name that exists), place into ~/.local/bin/ and make executable
+# call by running "exec-app somebinary" (or whatever you named it)
+# and/or use it with DMS's launcher/compositor binds as prefix, I suggest both everywhere
 #
-# firstword-word-word-...-finalword
-#
-appid=$(printf '%s\n' "$@"                                              \
-    | sed 's/^env\s*//'                                                 \
-    | sed '/^[A-Z_][A-Z0-9_]*=/d'                                       \
-    | sed '/^--[^ ]/d'                                                  \
-    | sed -e "/^start$/d"                                               \
-          -e "/^\/unix$/d"                                              \
-          -e "/^%f$/d"                                                  \
-          -e 's|^'"$HOME"'/[^[:space:]]*\/\(.*\)\.[eE][xX][eE]$|\1|'    \
-    | grep -v '^$'                                                      \
-    | sed '$!s/\([^-\]\)$/\1-/'                                         \
-    | tr -cd '[:alnum:]-'                                               \
-    | tr '[:upper:]' '[:lower:]')
+# NOTE:
+# If you had to create ~/.local/bin/ it will not be known to DMS as part of $PATH if it's already running
+# you must restart it, or do the usual logout/reboot, as you prefer if restarting it doesn't work
 
-# Generate random instance id (collision-resistant)
-random=$(openssl rand -hex 6)
+# Is it a flatpak? if so, there's no point in trying to wrap it into this, and we skip to the end
+flatpak=$(printf "$@" | grep flatpak)
 
-unit="app-${launcher}-${appid}-${random}"
+# Is it an appimage? If so, you may wish to uncomment what is right below flatpak, in case you ever see issues (unlikely)
+appimage=$(printf "$@" | grep appimage)
+if [ -n "$flatpak" ]; then
+    exec "$@"
+# elif [ -n "$appimage" ]; then
+#     exec "$@"
+else
+    # Modify the launcher prefix:
+    launcher="DMS"
 
-exec systemd-run --user \
-    --slice="$slice"    \
-    --unit="$unit"      \
-    --scope             \
-    --collect           \
-    -- "$@"
+    # Modify the slice, or sub-slice you want to launch it under:
+    # examples:
+    # app.slice - default slice, exists, standard convention
+    # desktop.slice - made-up slice that lives right under the user slice, doesn't exist and is made on call
+    # app-desktop.slice - creates the desktop slice under the app slice which is under the user slice
+    slice="desktop.slice"
+
+    # Try to guess a sensible ApplicationID, expected end format is:
+    #
+    # firstword-word-word-...-finalword - regular binaries
+    # firstword - appimages
+    #
+    appid=$(printf '%s\n' "$@"                                              \
+        | sed 's/^env\s*//'                                                 \
+        | sed '/^[A-Z_][A-Z0-9_]*=/d'                                       \
+        | sed 's|^\./||'                                                    \
+        | sed 's|^\/usr/bin/||'                                             \
+        | sed 's|[^a-zA-Z0-9].*\.appimage$||'                               \
+        | sed '/^--[^ ]/d'                                                  \
+        | sed -e "/^start$/d"                                               \
+              -e "/^\/unix$/d"                                              \
+              -e "/^%f$/d"                                                  \
+              -e 's|^'"$HOME"'/[^[:space:]]*\/\(.*\)\.[eE][xX][eE]$|\1|'    \
+        | grep -v '^$'                                                      \
+        | sed '$!s/\([^-\]\)$/\1-/'                                         \
+        | tr -cd '[:alnum:]-'                                               \
+        | tr '[:upper:]' '[:lower:]')
+
+    # Generate random instance id (collision-resistant)
+    random=$(openssl rand -hex 6)
+
+    # Give it a name, using the sensible ApplicationID
+    description="$appid"
+
+    # Structure it accordingly
+    unit="app-${launcher}-${appid}@${random}"
+
+    # Run it
+    exec systemd-run --user         \
+        --slice="$slice"            \
+        --unit="$unit"              \
+        --collect                   \
+        --description="$appid"      \
+        --service-type=exec         \
+        --property=ExitType=cgroup  \
+        -- "$@"
+fi

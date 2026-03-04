@@ -31,6 +31,7 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
+# I would like to use quickshell-git in place of noctalia-qs but "thankfully" it was hijacked by Cachy repos and pacman is super smart (stupid) thus repos take priority over AUR on every upgrade
 paru -S hyprland noctalia-qs dms-shell-bin cava wl-clipboard kitty qt5ct-kde qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse dconf-editor
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies).
