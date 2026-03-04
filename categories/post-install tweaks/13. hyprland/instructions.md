@@ -1,9 +1,9 @@
 # Preface
-This is an opinionated install, but clean of garbage configs that you'd have to hunt down as I list every manually modified directory, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different clipboard manager (`clipse`) to what Noctalia provides, but provide both, thus if you want to use the builtin one then take a look at its wiki and omit this package.
+This is an opinionated install, but clean of garbage configs that you'd have to hunt down as I list every manually modified directory, you can either skip KDE and come here (in which case, you're on your own), or proceed after picking KDE during the installation. Note that I use a different clipboard manager (`clipse`) to what DMS provides, but provide both, thus if you want to use the builtin one then take a look at its wiki and omit this package.
 
 # Directories modified manually (for easy cleanup)
 `~/.config/hypr/*`\
-`~/.config/systemd/user/*` (user systemd files for the wm and noctalia)\
+`~/.config/systemd/user/*` (user systemd files for the wm)\
 `~/.config/xdg-desktop-portal/`\
 `~/.config/flameshot/`\
 `~/.config/gtk-3.0/*` (theming start)\
@@ -16,6 +16,9 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 `~/.local/bin/exec-app` (app launching prefix script)\
 `~/.local/share/icons/default/index.theme` (XWayland cursor example)\
 `~/.local/share/applications/yazi.desktop` (run yazi in kitty)\
+`~/.local/share/applications/btop.desktop` (run btop in kitty)\
+`~/.local/share/applications/nvtop.desktop` (run nvtop in kitty)\
+`~/.local/share/applications/clipse.desktop` (modify clipse icon and its exec params)\
 `~/.local/share/color-schemes/EmeraldDarkCopy.colors` (theme)\
 `~/.local/share/dbus-1/services/org.freedesktop.secrets.service` (KWallet shenanigans)\
 `~/Mouse Accel Profile/` (python script for pointer accel)
@@ -28,9 +31,9 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland quickshell-git noctalia-shell-git cava cliphist wl-clipboard kitty qt5ct-kde qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse dconf-editor
+paru -S hyprland noctalia-qs dms-shell-bin cava wl-clipboard kitty qt5ct-kde qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse dconf-editor
 ```
-This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `noctalia-shell`'s dependencies).
+This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies).
 Note that you may also want `nwg-look` (theming) and `dconf-editor` (other stuff such as removing menu buttons, for example) to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
 
 ## Once that is done
@@ -44,7 +47,7 @@ grep -i 'yourlanguage' /usr/share/X11/xkb/rules/base.lst
 ```
 For me, this prints out the keycode `rs` and the variant that i want `latin`, so for me i would input `kb_layout = rs` & `kb_variant = latin` into `~/.config/hypr/config/input.conf` to apply it.
 ### Third
-Place whichever component in here that you are going to use into `~/.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf` and, if you use multiple monitors, `window_and_layer_rules.conf`. If your GPU is not nVidia, make sure to also remove the last two lines in `environment_variables.conf`.
+Place whichever component in here that you are going to use into `~/.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf` and, if you use multiple monitors, `window_and_layer_rules.conf`. If your GPU is not nVidia, make sure to also remove the last line in `environment_variables.conf`.
 
 If you don't want to theme things yourself, copy the theme related things at the top and in `qt5ct.conf` & `qt6ct.conf` change the paths to your username.
 ### Fourth
@@ -68,9 +71,10 @@ As in the third step, run through the things located outside of `~/.config/` and
 ### Sixth
 Open a terminal and type:
 ```sh
-systemctl --user add-wants hyprland-session.target noctalia.service 
+systemctl --user add-wants hyprland-session.target dms.service 
 systemctl --user add-wants hyprland-session.target hyprpolkitagent.service
 systemctl --user add-wants hyprland-session.target xdg-desktop-autostart.target
+chmod +x .local/bin/exec-app
 ```
 
 ## Now you can reboot into Hyprland
@@ -97,17 +101,17 @@ and customize the look and feel of GTK apps (take your time to explore the optio
 2. If you want to change the cursor theme, you have to do so in both the hyprland `input.conf` config, as well as in `~/.local/share/icons/default/index.theme` (for XWayland apps).
 
 3. If you want to autostart programs/scripts, you can use KDE settings autostart to add them in, or add them into the autostart section of the hyprland config. What I personally enable, is provided.
-### Noctalia
-1. Open the settings menu, and go to `Launcher -> Execute`. Tick on `Enable custom launch prefix` and in the field put `exec-app`. This is the prefix that will run everything through SystemD to unhook it from Noctalia/Hyprland and launch it in its own neatly-named scopes. If you wish to edit its functionality, simply open it (`~/.local/bin/exec-app`) in a text editor, as it is a bash script.
-#### (flatpaks, snaps and appimages are untested, if you have issues, then make your prefix be: `systemd-run --user --scope --collect` instead, and add `--` into Hyprland config additionally, so: `prefix -- binary`)
+### DMS
+1. Open the settings menu, and go to `Dock & Launcher -> Launcher -> Launch Prefix`. In the field put `exec-app`. This is the prefix that will run everything through SystemD in its own neatly-named services. If you wish to edit its functionality, simply open it (`~/.local/bin/exec-app`) in a text editor, as it is a bash script.
+#### (snaps are untested, if you have issues, then catch their naming and modify the script by attempting to follow what is done for flatpaks (aka omit the entire formatting) instead)
 
-2. Next, navigate to `Plugins -> Available` and install `Keybind Cheatsheet`, then press `Win|Super + h` so you can easily view your keybinds.
+2. Press `Win|Super + h` so you can easily view your keybinds. This relies on parsing `~/.config/hypr/dms/binds.conf`. I advise you to explicitly NOT include ANYTHING in this folder in your Hyprland config as an include, but rather keep it entirely separate and duplicate your binds from `keybinds.conf` into it at your leisure, the rest of the things here do nothing and may be omitted. Likewise, ignore all complaints `DMS` gives you on first run and do not let it generate things for you (or do, what do I care?).
 
-3. I suggest restarting Noctalia with:
+3. I suggest restarting DMS with:
 ```sh
-killall kded6 && systemctl --user restart noctalia.service || systemctl --user restart noctalia.service
+killall kded6 && systemctl --user restart dms.service || systemctl --user restart dms.service
 ```
-you can make this a custom button in the bar menu. If you neglect to kill `kded6` and it is running, your tray will get hijacked. Likewise if it is not running, the first command will error out and do nothing, which is why the conditional exists.
+you can make this a custom button in the bar menu by adding the `Dank Actions` plugin from `Settings -> Plugins -> Browse`, then once set up `Dank Bar -> Widgets -> Dank Actions - howYouNamedItHere`. For the icon I use `restart_alt`. If you neglect to kill `kded6` and it is running, your tray will get hijacked. Likewise if it is not running, the first command will error out and do nothing, which is why the conditional exists.
 # From here on feel free to customize things yourself.
 ### https://wiki.hypr.land/
-### https://docs.noctalia.dev/docs/
+### https://danklinux.com/docs/

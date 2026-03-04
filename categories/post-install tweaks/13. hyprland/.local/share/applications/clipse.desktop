@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Clipse
+Icon=kwrite
+Comment=clipse is a configurable clipboard manager application written in Go with minimal dependency
+Terminal=true
+Exec=kitty --class clipse -e clipse
+Type=Application
