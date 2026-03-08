@@ -20,9 +20,9 @@ systemctl disable getty@tty1.service && systemctl enable kmsconvt@tty1.service
 ```
 followed by:
 ```sh
-micro /etc/systemd/system/display-manager.service
+sudo systemctl edit -l plasmalogin.service
 ```
-or your favorite text editor, and change `Conflicts=` and `After=` references from `getty@tty1.service` to `kmsconvt@tty1.service` and save (do not modify anything else).
+copy the full contents after the first comment set, uncomment it and change `Conflicts=` and `After=` references from `getty@tty1.service` to `kmsconvt@tty1.service` and save (do not modify anything else).
 
 Finally:
 ```sh
