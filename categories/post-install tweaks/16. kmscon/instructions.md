@@ -22,7 +22,7 @@ followed by:
 ```sh
 sudo systemctl edit -l plasmalogin.service
 ```
-copy the full contents after the first comment set, uncomment it and change `Conflicts=` and `After=` references from `getty@tty1.service` to `kmsconvt@tty1.service` and save (do not modify anything else).
+now simply change `Conflicts=` and `After=` references from `getty@tty1.service` to `kmsconvt@tty1.service` and save (do not modify anything else).
 
 Finally:
 ```sh
