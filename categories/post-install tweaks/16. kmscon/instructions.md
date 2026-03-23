@@ -16,7 +16,7 @@ Then open it with your favorite text editor and edit the fields you wish, to you
 
 2. Now, open the terminal and type:
 ```sh
-systemctl disable getty@tty1.service && systemctl enable kmsconvt@tty1.service
+systemctl mask getty@tty1.service && systemctl enable kmsconvt@tty1.service
 ```
 followed by:
 ```sh

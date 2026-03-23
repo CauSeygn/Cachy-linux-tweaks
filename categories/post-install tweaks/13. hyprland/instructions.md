@@ -92,11 +92,17 @@ and customize the look and feel of QT5 (KDE) apps. Do not touch dialogs here. To
 ```sh
 nwg-look
 ```
-and customize the look and feel of GTK apps. Alternatively re-log back into KDE and change GTK looks there. Finally:
+and customize the look and feel of GTK apps. Alternatively re-log back into KDE and change GTK looks there. Then:
 ```sh
 dconf-editor
 ```
-and customize the look and feel of GTK apps (take your time to explore the options or don't).
+and customize the look and feel of GTK apps (take your time to explore the options or don't).Finally, if you wish root to have the same theming as you (such as in `btrfs-assistant`):
+```sh
+sudo cp -r .config/qt6ct/ /root/.config/
+sudo cp -r .config/gtk-3.0/ /root/.config/
+sudo cp -r .config/gtk-4.0/ /root/.config/
+```
+this will copy the relevant paths to root's configs.
 
 2. If you want to change the cursor theme, you have to do so in both the hyprland `input.conf` config, as well as in `~/.local/share/icons/default/index.theme` (for XWayland apps).
 
