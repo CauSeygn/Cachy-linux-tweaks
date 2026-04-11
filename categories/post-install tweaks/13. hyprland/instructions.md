@@ -31,7 +31,7 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland noctalia-qs-git dms-shell-bin cava wl-clipboard kitty qt5ct-kde qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse dconf-editor
+paru -S hyprland noctalia-qs-git dms-shell-hyprland cava wl-clipboard kitty qt5ct-kde qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse dconf-editor
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies).
 Note that you may also want `nwg-look` (theming) and `dconf-editor` (other stuff such as removing menu buttons, for example) to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
