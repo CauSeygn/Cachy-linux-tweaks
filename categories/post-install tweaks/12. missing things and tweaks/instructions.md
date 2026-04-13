@@ -17,7 +17,7 @@ And configure it to use the vlc backend, on some apps (such as kalarm) you need 
 ## Other (that I consider) missing stuff:
 
 ```sh
-paru -S kdenetwork-filesharing fuse2 kio-admin khelpcenter sshfs kcmutils5 icoutils
+paru -S kdenetwork-filesharing fuse2 kio-admin khelpcenter sshfs icoutils
 ```
 
 ### Explanations:
@@ -26,7 +26,6 @@ paru -S kdenetwork-filesharing fuse2 kio-admin khelpcenter sshfs kcmutils5 icout
 - dolphin admin actions
 - aggregated manual pages
 - kde connect filesystem browser
-- shows you some missing things in kde settings (such as s.m.a.r.t. monitor)
 - lets you manipulate icons off binary files (helpful for extracting icons out of .exe files)
 
 ## SSH

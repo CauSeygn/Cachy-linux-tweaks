@@ -8,7 +8,7 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 `~/.config/flameshot/`\
 `~/.config/gtk-3.0/*` (theming start)\
 `~/.config/gtk-4.0/*`\
-`~/.config/qt5ct/`\
+`~/.config/qt5ct/` (__ONLY IF YOU NEED QT5 PROGRAMS__)\
 `~/.config/qt6ct/` (theming end)\
 `~/.config/kitty/`\
 `~/.face/` (profile pics go here)\
@@ -31,9 +31,15 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland noctalia-qs-git dms-shell-hyprland cava wl-clipboard kitty qt5ct-kde qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse dconf-editor
+paru -S hyprland noctalia-qs-git dms-shell-hyprland cava wl-clipboard kitty qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot clipse dconf-editor
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies).
+
+If you use QT5 apps (you shouldn't, QT5 is EOL, but whatever), open a terminal and type:
+```sh
+paru -S qt5ct-kde
+```
+
 Note that you may also want `nwg-look` (theming) and `dconf-editor` (other stuff such as removing menu buttons, for example) to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
 
 ## Once that is done
@@ -49,7 +55,7 @@ For me, this prints out the keycode `rs` and the variant that i want `latin`, so
 ### Third
 Place whichever component in here that you are going to use into `~/.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf` and, if you use multiple monitors, `window_and_layer_rules.conf`. If your GPU is not nVidia, make sure to also remove the last line in `environment_variables.conf`.
 
-If you don't want to theme things yourself, copy the theme related things at the top and in `qt5ct.conf` & `qt6ct.conf` change the paths to your username.
+If you don't want to theme things yourself, copy (__COPY `qt5ct` FOLDER ONLY IF YOU USE QT5 APPS__) the theme related things at the top and in `qt5ct.conf` & `qt6ct.conf` change the paths to your username.
 ### Fourth
 If you use chromium-based browsers or electron apps (such as VS Code) with `kwallet`:
 
@@ -84,7 +90,7 @@ chmod +x .local/bin/exec-app
 ```sh
 qt6ct
 ```
-and customize the look and feel of QT6 (KDE) apps. Make sure that for `Standard dialogs` in general tab, you select `KDE`. Once you're done, repeat, but this time:
+and customize the look and feel of QT6 (KDE) apps. Make sure that for `Standard dialogs` in general tab, you select `KDE`. Once you're done, repeat (__ONLY IF YOU USE QT5 APPS OTHERWISE SKIP THIS__), but this time:
 ```sh
 qt5ct
 ```
