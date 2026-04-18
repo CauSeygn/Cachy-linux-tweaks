@@ -27,7 +27,7 @@ then:
 # Or your favorite text editor, if you don't like micro
 micro .config/arch-update/arch-update.conf
 ```
-if you do not use use flatpak, uncomment `NoFlatpak`, uncomment `AURHelper` and change to `yay`.
+if you do not use flatpak, uncomment `NoFlatpak`, uncomment `AURHelper` and change to `yay`.
 
 # Final note
 The usage of yay is nearly identical to that of paru, for more info `man yay`.
