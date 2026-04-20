@@ -20,6 +20,6 @@ sudo limine-mkinitcpio
 ```
 to regenerate the kernel images without this garbage software in it. Now you can run:
 ```sh
-paru -Rns plymouth
+paru -Rns plymouth plymouth-kcm cachyos-plymouth-bootanimation
 ```
 to remove this garbage and return to sanity, congratulations.
