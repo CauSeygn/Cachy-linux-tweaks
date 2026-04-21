@@ -10,7 +10,7 @@ This is my list of programs, which I use on Linux
 - YouTube client: freetube
 - Calculator: qalculate (qt)
 - Image editing: aseprite, gimp, inkscape, krita, pixi-editor
-- Screenshotting: spectacle (kde), flameshot (hyprland)
+- Screenshotting: spectacle (kde), hyprshot (hyprland)
 - 3d modeling: blender
 - Video recording: obs, gpu-screen-recorder
 - Archive manager: 7-zip (wine, native Linux ones have issues dealing with jis)
