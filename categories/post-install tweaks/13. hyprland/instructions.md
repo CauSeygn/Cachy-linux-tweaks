@@ -5,7 +5,6 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 `~/.config/hypr/*`\
 `~/.config/systemd/user/*` (user systemd files for the wm)\
 `~/.config/xdg-desktop-portal/`\
-`~/.config/flameshot/`\
 `~/.config/gtk-3.0/*` (theming start)\
 `~/.config/gtk-4.0/*`\
 `~/.config/qt5ct/` (__ONLY IF YOU NEED QT5 PROGRAMS__)\
@@ -31,7 +30,7 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland noctalia-qs-git dms-shell-git cava wl-clipboard kitty qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie flameshot-git clipse dconf-editor
+paru -S hyprland noctalia-qs-git dms-shell-git cava wl-clipboard kitty qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie hyprshot clipse dconf-editor
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies).
 
