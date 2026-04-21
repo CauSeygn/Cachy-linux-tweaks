@@ -17,7 +17,7 @@ This is my list of programs, which I use on Linux
 - Terminal: konsole, kitty
 - Text editor: kate, micro, vscode (not vscodium), nano
 - Office suite: onlyoffice
-- Alarm: kalarm (kde), dank pomodoro timer (dms plugin, hyprland)
+- Alarm: kalarm (kde), alarm clock (dms plugin, hyprland)
 - Virtual machines: qemu, virt-manager (check ufw or disable it)
 - Android emulator: genymotion (check ufw or disable it)
 - Emulators: pcsx2, rpcs3, ppsspp
