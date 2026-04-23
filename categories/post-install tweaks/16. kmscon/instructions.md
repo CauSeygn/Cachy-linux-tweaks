@@ -12,7 +12,7 @@ sudo cp /etc/kmscon/kmscon.conf.example /etc/kmscon/kmscon.conf
 ```
 or, copy the provided kmscon.conf example from this section to `/etc/kmscon/`.
 
-Then open it with your favorite text editor and edit the fields you wish, to your liking by consulting the archwiki kmscon page and the config file itself which is nicely documented (note that mine includes autologin at the very bottom, however that does not work for whatever reason, unfortunately).
+Then open it with your favorite text editor and edit the fields you wish, to your liking by consulting the archwiki kmscon page and the config file itself which is nicely documented ~~(note that mine includes autologin at the very bottom, however that does not work for whatever reason, unfortunately)~~ as of `kmscon 9.3.4` autologin works.
 
 2. Now, open the terminal and type:
 ```sh
