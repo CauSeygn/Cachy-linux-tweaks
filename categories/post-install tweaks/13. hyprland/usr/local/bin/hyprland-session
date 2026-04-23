@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -eou pipefail
+
+# Either set the export value according to the output of:
+#
+# echo $PATH
+#
+# (each entry delimited by :) (no, that is not a smiley face)
+# or leave it like this, you don't have to do anything else here
+export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin"
+
+systemctl --user import-environment \
+	DISPLAY							\
+	PATH							\
+	DBUS_SESSION_BUS_ADDRESS		\
+	XDG_SEAT						\
+	XDG_SESSION_CLASS				\
+	XDG_SESSION_ID					\
+	XDG_SESSION_TYPE				\
+	XDG_VTNR						\
+	2>/dev/null || true
+
+systemctl --user reset-failed 2>/dev/null || true
+
+systemctl --user start --wait hyprland.service
+
+systemctl --user stop				\
+	hyprland-session.target			\
+	graphical-session.target		\
+	graphical-session-pre.target	\
+	2>/dev/null || true

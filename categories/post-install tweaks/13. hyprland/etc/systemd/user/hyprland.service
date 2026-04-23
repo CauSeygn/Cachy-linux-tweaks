@@ -1,0 +1,15 @@
+[Unit]
+Description=Hyprland Wayland compositor
+Before=hyprland-session.target
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target
+OnSuccess=hyprland-session-shutdown.target
+OnFailure=hyprland-session-shutdown.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/start-hyprland
+Restart=no
+
+[Install]
+WantedBy=hyprland-session.target

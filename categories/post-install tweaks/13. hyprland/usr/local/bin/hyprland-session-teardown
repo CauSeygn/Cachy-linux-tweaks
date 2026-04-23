@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -eou pipefail
+
+# Add all the env's that you set in:
+#
+# .config/hypr/config/environment_variables.conf
+#
+# here, after DBUS_SESSION_BUS_ADDRESS, provided are ONLY the ones I use
+# do not add or remove anything elsewhere in here
+systemctl --user unset-environment	\
+	WAYLAND_DISPLAY					\
+	DISPLAY							\
+	DBUS_SESSION_BUS_ADDRESS		\
+	XCURSOR_SIZE					\
+	HYPRCURSOR_SIZE					\
+	XCURSOR_THEME					\
+	QT_QPA_PLATFORM					\
+	QT_QPA_PLATFORMTHEME			\
+	XDG_MENU_PREFIX					\
+	GTK_THEME						\
+	GTK_USE_PORTAL					\
+	XDG_CURRENT_DESKTOP				\
+	XDG_SESSION_TYPE				\
+	XDG_SESSION_DESKTOP

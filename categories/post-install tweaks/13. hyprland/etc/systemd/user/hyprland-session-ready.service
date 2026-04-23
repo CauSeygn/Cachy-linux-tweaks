@@ -1,0 +1,13 @@
+[Unit]
+Description=Signal Hyprland session readiness and propagate environment
+After=hyprland.service
+PartOf=hyprland-session.target
+BindsTo=graphical-session.target
+Wants=graphical-session.target xdg-desktop-autostart.target
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/hyprland-session-ready
+ExecStop=/usr/local/bin/hyprland-session-teardown

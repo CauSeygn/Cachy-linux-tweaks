@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Hyprland-systemd
+Comment=An intelligent dynamic tiling Wayland compositor (systemd managed)
+Exec=/usr/local/bin/hyprland-session
+Type=Application
+DesktopNames=Hyprland
+Keywords=tiling;wayland;compositor;

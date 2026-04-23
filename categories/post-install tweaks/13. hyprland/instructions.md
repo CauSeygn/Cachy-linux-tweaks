@@ -3,7 +3,9 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 
 # Directories modified manually (for easy cleanup)
 `~/.config/hypr/*`\
-`~/.config/systemd/user/*` (user systemd files for the wm)\
+`/etc/systemd/user/hyprland-*` (user systemd files for the wm start)\
+`/usr/local/bin/hyprland-*`\
+`/usr/share/wayland-sessions/hyprland-systemd.desktop` (user systemd files for the wm end)\
 `~/.config/xdg-desktop-portal/`\
 `~/.config/gtk-3.0/*` (theming start)\
 `~/.config/gtk-4.0/*`\
@@ -73,7 +75,10 @@ wherever you like into the {} enclosure, surely you know json syntax?
 3. Naturally for autologin, your KWallet password should be passwordless, or mess with `pam_autologin` from the aur, following the arch wiki pam page if you want passworded autologin unlocks.
 ### Fifth
 As in the third step, run through the things located outside of `~/.config/` and place them where they are shown to be (creating paths that don't exist beforehand).
-### Sixth
+
+# **<u>IT IS VERY IMPORTANT TO READ THROUGH THE SCRIPTS THAT CONCERN SYSTEMD (`/usr/local/bin/hyprland-*`)!</u>**
+Edit them according to the instructions inside using your favorite text editor.
+### Sixth - Old (gone, left for migration purposes)
 Open a terminal and type:
 ```sh
 systemctl --user add-wants hyprland-session.target dms.service 
@@ -81,8 +86,34 @@ systemctl --user add-wants hyprland-session.target hyprpolkitagent.service
 systemctl --user add-wants hyprland-session.target xdg-desktop-autostart.target
 chmod +x .local/bin/exec-app
 ```
+### Sixth - New
+Open a terminal and type:
+```sh
+systemctl --user add-wants hyprland-session-ready.service.wants dms.service 
+systemctl --user add-wants hyprland-session-ready.service.wants hyprpolkitagent.service
+# ↑ For anything else you want to run ONLY in hyprland, keep following the pattern above
 
-## Now you can reboot into Hyprland
+chmod +x .local/bin/exec-app
+chmod +x /usr/local/bin/hyprland-session
+chmod +x /usr/local/bin/hyprland-session-ready
+chmod +x /usr/local/bin/hyprland-session-teardown
+```
+### Sixth (**SPECIAL**)- Migration from Old to New
+Open a terminal and type:
+```sh
+rm .config/systemd/user/hyprland-session.target
+rm -rf .config/systemd/user/hyprland-session.target.wants/
+systemctl --user add-wants hyprland-session-ready.service.wants dms.service 
+systemctl --user add-wants hyprland-session-ready.service.wants hyprpolkitagent.service
+# ↑ For anything else you want to run ONLY in hyprland, keep following the pattern above
+
+chmod +x .local/bin/exec-app
+chmod +x /usr/local/bin/hyprland-session
+chmod +x /usr/local/bin/hyprland-session-ready
+chmod +x /usr/local/bin/hyprland-session-teardown
+```
+If in Hyprland, reboot; if not, simply log into `Hyprland-systemd` from the login manager.
+## Now you can reboot into `Hyprland-systemd`
 (I trust you copied everything provided, otherwise you're on your own.)
 ### Now that you are in Hyprland
 1. Open a terminal with `Win|Super + q` and type:

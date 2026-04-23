@@ -1,0 +1,4 @@
+[Unit]
+Description=Hyprland compositor session
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target
