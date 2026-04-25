@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 set -eou pipefail
 
-# Either set the export value according to the output of:
-#
-# echo $PATH
-#
-# (each entry delimited by :) (no, that is not a smiley face)
-# or leave it like this, you don't have to do anything else here
-export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin"
+export PATH="$(fish --login -c 'string join : $PATH')"
 
 systemctl --user import-environment \
 	DISPLAY							\
@@ -25,6 +19,7 @@ systemctl --user reset-failed 2>/dev/null || true
 systemctl --user start --wait hyprland.service
 
 systemctl --user stop				\
+	--job-mode=replace-irreversibly	\
 	hyprland-session.target			\
 	graphical-session.target		\
 	graphical-session-pre.target	\

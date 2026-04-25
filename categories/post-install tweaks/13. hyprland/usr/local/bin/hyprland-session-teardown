@@ -8,6 +8,7 @@ set -eou pipefail
 # here, after DBUS_SESSION_BUS_ADDRESS, provided are ONLY the ones I use
 # do not add or remove anything elsewhere in here
 systemctl --user unset-environment	\
+	PATH							\
 	WAYLAND_DISPLAY					\
 	DISPLAY							\
 	DBUS_SESSION_BUS_ADDRESS		\
