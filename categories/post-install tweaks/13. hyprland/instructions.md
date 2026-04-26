@@ -89,8 +89,8 @@ chmod +x .local/bin/exec-app
 ### Sixth - New
 Open a terminal and type:
 ```sh
-systemctl --user add-wants hyprland-session-ready.service.wants dms.service 
-systemctl --user add-wants hyprland-session-ready.service.wants hyprpolkitagent.service
+systemctl --user add-wants hyprland-session-ready.service dms.service 
+systemctl --user add-wants hyprland-session-ready.service hyprpolkitagent.service
 # ↑ For anything else you want to run ONLY in hyprland, keep following the pattern above
 
 chmod +x .local/bin/exec-app
@@ -103,8 +103,8 @@ Open a terminal and type:
 ```sh
 rm .config/systemd/user/hyprland-session.target
 rm -rf .config/systemd/user/hyprland-session.target.wants/
-systemctl --user add-wants hyprland-session-ready.service.wants dms.service 
-systemctl --user add-wants hyprland-session-ready.service.wants hyprpolkitagent.service
+systemctl --user add-wants hyprland-session-ready.service dms.service 
+systemctl --user add-wants hyprland-session-ready.service hyprpolkitagent.service
 # ↑ For anything else you want to run ONLY in hyprland, keep following the pattern above
 
 chmod +x .local/bin/exec-app
