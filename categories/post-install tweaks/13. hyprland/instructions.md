@@ -9,7 +9,6 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 `~/.config/xdg-desktop-portal/`\
 `~/.config/gtk-3.0/*` (theming start)\
 `~/.config/gtk-4.0/*`\
-`~/.config/qt5ct/` (__ONLY IF YOU NEED QT5 PROGRAMS__)\
 `~/.config/qt6ct/` (theming end)\
 `~/.config/kitty/`\
 `~/.face/` (profile pics go here)\
@@ -36,11 +35,6 @@ paru -S hyprland noctalia-qs-git dms-shell-git cava wl-clipboard kitty qt6ct-kde
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies).
 
-If you use QT5 apps (you shouldn't, QT5 is EOL, but whatever), open a terminal and type:
-```sh
-paru -S qt5ct-kde
-```
-
 Note that you may also want `nwg-look` (theming) and `dconf-editor` (other stuff such as removing menu buttons, for example) to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
 
 ## Once that is done
@@ -56,7 +50,7 @@ For me, this prints out the keycode `rs` and the variant that i want `latin`, so
 ### Third
 Place whichever component in here that you are going to use into `~/.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf` and, if you use multiple monitors, `window_and_layer_rules.conf`. If your GPU is not nVidia, make sure to also remove the last line in `environment_variables.conf`.
 
-If you don't want to theme things yourself, copy (__COPY `qt5ct` FOLDER ONLY IF YOU USE QT5 APPS__) the theme related things at the top and in `qt5ct.conf` & `qt6ct.conf` change the paths to your username.
+If you don't want to theme things yourself, copy the theme related things at the top and in `qt5ct.conf` & `qt6ct.conf` change the paths to your username.
 ### Fourth
 If you use chromium-based browsers or electron apps (such as VS Code) with `kwallet`:
 
@@ -78,14 +72,6 @@ As in the third step, run through the things located outside of `~/.config/` and
 
 # **<u>IT IS VERY IMPORTANT TO READ THROUGH THE SCRIPTS THAT CONCERN SYSTEMD (`/usr/local/bin/hyprland-*`)!</u>**
 Edit them according to the instructions inside using your favorite text editor.
-### Sixth - Old (gone, left for migration purposes)
-Open a terminal and type:
-```sh
-systemctl --user add-wants hyprland-session.target dms.service 
-systemctl --user add-wants hyprland-session.target hyprpolkitagent.service
-systemctl --user add-wants hyprland-session.target xdg-desktop-autostart.target
-chmod +x .local/bin/exec-app
-```
 ### Sixth - New
 Open a terminal and type:
 ```sh
@@ -98,21 +84,6 @@ chmod +x /usr/local/bin/hyprland-session
 chmod +x /usr/local/bin/hyprland-session-ready
 chmod +x /usr/local/bin/hyprland-session-teardown
 ```
-### Sixth (**SPECIAL**)- Migration from Old to New
-Open a terminal and type:
-```sh
-rm .config/systemd/user/hyprland-session.target
-rm -rf .config/systemd/user/hyprland-session.target.wants/
-systemctl --user add-wants hyprland-session-ready.service dms.service 
-systemctl --user add-wants hyprland-session-ready.service hyprpolkitagent.service
-# ↑ For anything else you want to run ONLY in hyprland, keep following the pattern above
-
-chmod +x .local/bin/exec-app
-chmod +x /usr/local/bin/hyprland-session
-chmod +x /usr/local/bin/hyprland-session-ready
-chmod +x /usr/local/bin/hyprland-session-teardown
-```
-If in Hyprland, reboot; if not, simply log into `Hyprland-systemd` from the login manager.
 ## Now you can reboot into `Hyprland-systemd`
 (I trust you copied everything provided, otherwise you're on your own.)
 ### Now that you are in Hyprland
@@ -120,11 +91,7 @@ If in Hyprland, reboot; if not, simply log into `Hyprland-systemd` from the logi
 ```sh
 qt6ct
 ```
-and customize the look and feel of QT6 (KDE) apps. Make sure that for `Standard dialogs` in general tab, you select `KDE`. Once you're done, repeat (__ONLY IF YOU USE QT5 APPS OTHERWISE SKIP THIS__), but this time:
-```sh
-qt5ct
-```
-and customize the look and feel of QT5 (KDE) apps. Do not touch dialogs here. To do the same with GTK apps:
+and customize the look and feel of QT6 (KDE) apps. Make sure that for `Standard dialogs` in general tab, you select `KDE`. To do the same with GTK apps:
 ```sh
 nwg-look
 ```
@@ -132,7 +99,7 @@ and customize the look and feel of GTK apps. Alternatively re-log back into KDE 
 ```sh
 dconf-editor
 ```
-and customize the look and feel of GTK apps (take your time to explore the options or don't).Finally, if you wish root to have the same theming as you (such as in `btrfs-assistant`):
+and customize the look and feel of GTK apps (take your time to explore the options or don't). Finally, if you wish root to have the same theming as you (such as in `btrfs-assistant`):
 ```sh
 sudo cp -r .config/qt6ct/ /root/.config/
 sudo cp -r .config/gtk-3.0/ /root/.config/
