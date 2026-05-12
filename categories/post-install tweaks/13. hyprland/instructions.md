@@ -31,26 +31,26 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland noctalia-qs-git dms-shell-git cava wl-clipboard kitty qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie hyprshot clipse dconf-editor
+paru -S hyprland aur/quickshell-git dms-shell-git cava wl-clipboard kitty qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie hyprshot clipse dconf-editor
 ```
-This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies).
+This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies). You will also have to decide which `quickshell` you want to use going forward, I recommend `aur/quickshell-git` (`paru -S aur/quickshell-git` as updates are available), but this may become annoying to you (it will require manual updating as the package was hijacked by CachyOS, sadly, and is not up to date with upstream -git; bad for non-stable software).
 
 Note that you may also want `nwg-look` (theming) and `dconf-editor` (other stuff such as removing menu buttons, for example) to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
 
 ## Once that is done
 There are a few things to do before going into Hyprland.
 ### First
-Set your default session in KDE System Settings to Hyprland (if you use autologin).
+Set your default session in KDE System Settings to Hyprland-systemd (if you use autologin).
 ### Second
 Find your keyboard layout if it's different from English (US):
 ```sh
 grep -i 'yourlanguage' /usr/share/X11/xkb/rules/base.lst
 ```
-For me, this prints out the keycode `rs` and the variant that i want `latin`, so for me i would input `kb_layout = rs` & `kb_variant = latin` into `~/.config/hypr/config/input.conf` to apply it.
+For me, this prints out the keycode `rs` and the variant that i want `latin`, so for me i would input `kb_layout = rs` & `kb_variant = latin` into `~/.config/hypr/config/input.lua` to apply it.
 ### Third
-Place whichever component in here that you are going to use into `~/.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.conf` and, if you use multiple monitors, `window_and_layer_rules.conf`. If your GPU is not nVidia, make sure to also remove the last line in `environment_variables.conf`.
+Place whichever component in here that you are going to use into `~/.config/` and give the configs a read-through to familiarize yourself, __ESPECIALLY__ `input.lua` and, if you use multiple monitors, `window_and_layer_rules.lua`. If your GPU is not nVidia, make sure to also remove the last line in `environment_variables.lua`.
 
-If you don't want to theme things yourself, copy the theme related things at the top and in `qt5ct.conf` & `qt6ct.conf` change the paths to your username.
+If you don't want to theme things yourself, copy the theme related things at the top and in `qt6ct.conf` change the path to your username.
 ### Fourth
 If you use chromium-based browsers or electron apps (such as VS Code) with `kwallet`:
 
@@ -107,14 +107,14 @@ sudo cp -r .config/gtk-4.0/ /root/.config/
 ```
 this will copy the relevant paths to root's configs.
 
-2. If you want to change the cursor theme, you have to do so in both the hyprland `input.conf` config, as well as in `~/.local/share/icons/default/index.theme` (for XWayland apps).
+2. If you want to change the cursor theme, you have to do so in both the hyprland `input.lua` config, as well as in `~/.local/share/icons/default/index.theme` (for XWayland apps).
 
 3. If you want to autostart programs/scripts, you can use KDE settings autostart to add them in, or add them into the autostart section of the hyprland config. What I personally enable, is provided.
 ### DMS
 1. Open the settings menu, and go to `Dock & Launcher -> Launcher -> Launch Prefix`. In the field put `exec-app`. This is the prefix that will run everything through SystemD in its own neatly-named services. If you wish to edit its functionality, simply open it (`~/.local/bin/exec-app`) in a text editor, as it is a bash script.
 #### (snaps are untested, if you have issues, then catch their naming and modify the script by attempting to follow what is done for flatpaks (aka omit the entire formatting) instead)
 
-2. Press `Win|Super + h` so you can easily view your keybinds. This relies on parsing `~/.config/hypr/dms/binds.conf`. I advise you to explicitly NOT include ANYTHING in this folder in your Hyprland config as an include, but rather keep it entirely separate and duplicate your binds from `keybinds.conf` into it at your leisure, the rest of the things here do nothing and may be omitted. Likewise, ignore all complaints `DMS` gives you on first run and do not let it generate things for you (or do, what do I care?).
+2. Press `Win|Super + h` so you can easily view your keybinds. This relies on parsing `~/.config/hypr/dms/binds.conf`. I advise you to explicitly NOT include ANYTHING in this folder in your Hyprland config as an include, but rather keep it entirely separate and duplicate your binds from `keybinds.lua` into it at your leisure **MIND THE SYNTAX AS OF 0.55 (it is still hyprlang, not lua)**, the rest of the things here do nothing and may be omitted. Likewise, ignore all complaints `DMS` gives you on first run and do not let it generate things for you (or do, what do I care?).
 
 3. I suggest restarting DMS with:
 ```sh

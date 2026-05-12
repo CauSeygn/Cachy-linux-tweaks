@@ -1,0 +1,73 @@
+---------------
+---- INPUT ----
+---------------
+
+hl.config({
+    input = {
+        -- Layout and layout variant settings, you can use:
+
+        -- localectl list-x11-keymap-variants
+        -- localectl list-x11-keymap-layouts
+
+        -- To try and figure them out, or you can set your layout in KDE System Settings and figure it out from there, should be straightforward. Plus this way you also get a preview to make sure.
+        kb_layout  = "rs",
+        kb_variant = "latin",
+        kb_model   = "",
+        kb_options = "",
+        kb_rules   = "",
+
+        -- Keyboard hold delay in ms before the held key repeats and at what rate it repeats/s.
+        repeat_delay = 200,
+        repeat_rate = 50,
+
+        -- Follow Mouse Cursor:
+        -- 0 - Cursor movement will not change focus.
+        -- 1 - Cursor movement will always change focus to the window under the cursor.
+        -- 2 - Cursor focus will be detached from keyboard focus. Clicking on a window will move keyboard focus to that window.
+        -- 3 - Cursor focus will be completely separate from keyboard focus. Clicking on a window will not change keyboard focus.
+        follow_mouse = 1,
+
+        sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
+
+        -- Acceleration profile, mimicking Windows' enhanced cursor precision:
+	    -- Download the script from https://gist.github.com/fufexan/de2099bc3086f3a6c83d61fc1fcc06c9 and extract it.
+	    -- Usage:
+	    -- Edit the parameters in the script according to your monitor and mouse specs using a text editor, then save, then open the terminal (guide assumes fish shell):
+	    -- 1) navigate to the folder you downloaded the script to, using cd
+	    -- 2) python -m venv .venv
+	    -- 3) source .venv/bin/activate.fish
+	    -- 4) python accel.py
+	    -- The first number is step size, then just paste the rest, alternatively set to adaptive if you want to use your in-built mouse acceleration profile or flat if you do not want any mouse acceleration.
+        -- The profile below is for a 27" 1440p monitor, using an 800dpi mouse, with a monitor scaling of 1, at 20 sample points and a sensitivity factor of 3:
+        accel_profile = "custom 0.1715582005 0.000 0.175 0.349 0.611 0.874 1.136 1.422 1.821 2.220 2.619 3.017 3.416 3.815 4.214 4.613 5.012 5.410 5.809 6.208 7.032",
+
+        focus_on_close = 1,
+
+        -- If enabled, having only floating windows in the special workspace will not block focusing windows in the regular workspace.
+        special_fallthrough = true,
+
+        touchpad = {
+            natural_scroll = false,
+        },
+    },
+
+    cursor = {
+        -- Despite the wiki saying that nVidia users should use CPU buffers for hardware cursors, this is wrong, do not enable this or your cursor will become a jittery mess.
+        use_cpu_buffer = 0,
+	    no_hardware_cursors = 0,
+        persistent_warps = true,
+    },
+})
+
+hl.gesture({
+    fingers = 3,
+    direction = "horizontal",
+    action = "workspace"
+})
+
+-- Example per-device config
+-- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
+hl.device({
+    name        = "epic-mouse-v1",
+    sensitivity = -0.5,
+})
