@@ -383,6 +383,26 @@ hl.window_rule({
     pin = true,
 })
 
+-----------------------
+---- SPECIAL RULES ----
+-----------------------
+
+-- On workspaces with fullscreen windows, AUTOMATICALLY create new windows fullscreen'd
+hl.on("window.open", function(win)
+    local ws = win.workspace
+
+    for _, w in ipairs(hl.get_windows()) do
+        if w.workspace ~= nil
+        and w.workspace.id == ws.id
+        and w.address ~= win.address   -- skip the newly opened window itself
+        and w.fullscreen > 0           -- 1 = fullscreen, 2 = maximised
+        then
+            hl.dispatch(hl.dsp.window.fullscreen({ action = "set", window = win }))
+            break
+        end
+    end
+end)
+
 ---------------------
 ---- LAYER RULES ----
 ---------------------
