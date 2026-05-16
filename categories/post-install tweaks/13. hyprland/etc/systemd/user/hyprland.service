@@ -3,13 +3,15 @@ Description=Hyprland Wayland compositor
 Before=hyprland-session.target
 Wants=graphical-session-pre.target
 After=graphical-session-pre.target
-OnSuccess=hyprland-session-shutdown.target
 OnFailure=hyprland-session-shutdown.target
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/start-hyprland
-Restart=no
+Restart=on-failure
+RestartSec=3
+StartLimitBurst=3
+StartLimitIntervalSec=30
 
 [Install]
 WantedBy=hyprland-session.target

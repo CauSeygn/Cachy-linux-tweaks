@@ -9,7 +9,7 @@
 hl.on("hyprland.start", function ()
     -- This bit starts systemd graphical target management which will neatly pull in the rest of the things that depend on it.
     -- Do not modify this.
-    hl.exec_cmd("dbus-update-activation-environment --systemd --all; systemctl --user start hyprland-session-ready.service")
+    hl.exec_cmd("dbus-update-activation-environment --systemd --all; systemctl --user restart hyprland-session-ready.service")
 end)
 -- Or every config reload like this:
 hl.on("config.reloaded", function ()

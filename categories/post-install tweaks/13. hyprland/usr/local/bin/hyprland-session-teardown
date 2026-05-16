@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -eou pipefail
 
+systemctl --user stop xdg-desktop-autostart.target
 # Add all the env's that you set in:
 #
 # .config/hypr/config/environment_variables.conf
