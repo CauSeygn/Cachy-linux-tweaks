@@ -8,6 +8,7 @@ OnFailure=hyprland-session-shutdown.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/start-hyprland
+ExecStop=/usr/bin/systemctl --user stop xdg-desktop-autostart.target
 Restart=on-failure
 RestartSec=3
 StartLimitBurst=3

@@ -77,12 +77,14 @@ Open a terminal and type:
 ```sh
 systemctl --user add-wants hyprland-session-ready.service dms.service 
 systemctl --user add-wants hyprland-session-ready.service hyprpolkitagent.service
+systemctl --user add-wants hyprland-session-ready.service plasma-xdg-desktop-portal-kde.service
 # ↑ For anything else you want to run ONLY in hyprland, keep following the pattern above
 
 chmod +x .local/bin/exec-app
 chmod +x /usr/local/bin/hyprland-session
 chmod +x /usr/local/bin/hyprland-session-ready
-chmod +x /usr/local/bin/hyprland-session-teardown
+# THE FOLLOWING LINE IS DEPRECATED, AND MUCH HAS CHANGED HERE, IF YOU USED THE OLD METHOD WITH THIS FILE IN IT, PLEASE REVISIT THIS SECTION ASAP!
+# chmod +x /usr/local/bin/hyprland-session-teardown
 ```
 ## Now you can reboot into `Hyprland-systemd`
 (I trust you copied everything provided, otherwise you're on your own.)
@@ -121,6 +123,13 @@ this will copy the relevant paths to root's configs.
 killall kded6 && systemctl --user restart dms.service || systemctl --user restart dms.service
 ```
 you can make this a custom button in the bar menu by adding the `Dank Actions` plugin from `Settings -> Plugins -> Browse`, then once set up `Dank Bar -> Widgets -> Dank Actions - howYouNamedItHere`. For the icon I use `restart_alt`. If you neglect to kill `kded6` and it is running, your tray will get hijacked. Likewise if it is not running, the first command will error out and do nothing, which is why the conditional exists.
+
+Similarly, you can restart Hyprland from within Hyprland via:
+```sh
+systemctl --user restart hyprland.service
+```
+of course, you can also simply log out, however this is mainly for if you encounter hard crashes. Whether you
+choose to use this, or how (via dms, hl.bind, manually...), is up to you.
 # From here on feel free to customize things yourself.
 ### https://wiki.hypr.land/
 ### https://danklinux.com/docs/

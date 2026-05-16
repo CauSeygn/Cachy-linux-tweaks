@@ -5,6 +5,7 @@ export PATH="$(fish --login -c 'string join : $PATH')"
 
 systemctl --user import-environment \
 	DISPLAY							\
+	WAYLAND_DISPLAY					\
 	PATH							\
 	DBUS_SESSION_BUS_ADDRESS		\
 	XDG_SEAT						\

@@ -3,7 +3,7 @@ set -eou pipefail
 
 # Add all the env's that you set in:
 #
-# .config/hypr/config/environment_variables.conf
+# .config/hypr/config/environment_variables.lua
 #
 # here, after DBUS_SESSION_BUS_ADDRESS, provided are ONLY the ones I use
 # do not add or remove anything elsewhere in here
