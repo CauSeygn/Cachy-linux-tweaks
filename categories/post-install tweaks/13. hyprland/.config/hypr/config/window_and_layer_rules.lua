@@ -127,7 +127,27 @@ hl.window_rule({
     float = true,
 })
 
--- Gwenview Send to Device
+-- Gwenview
+hl.window_rule({
+    name = "gwenview-hyprshot",
+    match = {
+        initial_class = "^(org.kde.gwenview)$",
+    },
+    float = true,
+    move = {"(monitor_w*0.245)", "(monitor_h*0.01)"},
+    size = {"(monitor_w*0.75)", "(monitor_h*0.75)"},
+})
+
+hl.window_rule({
+    name = "gwenview-annotate",
+    match = {
+        initial_title = "(Annotate)(.*)(Gwenview)",
+    },
+    center = true,
+    float = true,
+    size = {"(monitor_w*0.85)", "(monitor_h*0.8)"},
+})
+
 hl.window_rule({
     name = "gwenview-share",
     match = {
@@ -146,17 +166,6 @@ hl.window_rule({
     },
     render_unfocused = true,
     float = true,
-})
-
--- Hyprshot Annotating in Gwenview
-hl.window_rule({
-    name = "hyprshot-gwenview",
-    match = {
-        initial_title = "^(Gwenview)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.65)", "(monitor_h*0.75)"},
 })
 
 -- KeepassXC
