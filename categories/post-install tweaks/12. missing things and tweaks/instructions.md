@@ -14,6 +14,17 @@ phononsettings
 
 And configure it to use the vlc backend, on some apps (such as kalarm) you need to do this in its settings, so keep an eye out for that.
 
+### Jack:
+Open the terminal and run:
+```sh
+paru -Qs jack
+```
+if you get out of `pipewire-jack` - great, move on from here - if you do not get output of `pipewire-jack`, run:
+```sh
+paru -S pipewire-jack
+```
+When prompted, replace `jack2` or whatever by typing `y` then pressing enter; pipewire-jack supersedes it.
+
 ## Other (that I consider) missing stuff:
 
 ```sh
