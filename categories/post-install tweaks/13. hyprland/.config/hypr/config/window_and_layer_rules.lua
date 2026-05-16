@@ -390,6 +390,7 @@ hl.window_rule({
 -- On workspaces with fullscreen windows, AUTOMATICALLY create new windows fullscreen'd
 hl.on("window.open", function(win)
     local ws = win.workspace
+    if win.floating then return end -- Skip windows that open floating
 
     for _, w in ipairs(hl.get_windows()) do
         if w.workspace ~= nil
