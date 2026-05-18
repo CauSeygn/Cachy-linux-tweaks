@@ -60,7 +60,7 @@ systemctl --user unset-environment		\
 	XDG_CURRENT_DESKTOP					\
 	XDG_SESSION_DESKTOP					\
 	2>/dev/null || true
-# ── End logout detection ──────────────────────────────────────────────────────
+# ── End logout cleanup ──────────────────────────────────────────────────────
 
 systemctl --user stop				\
 	--job-mode=replace-irreversibly	\
