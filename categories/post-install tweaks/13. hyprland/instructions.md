@@ -81,8 +81,8 @@ systemctl --user add-wants hyprland-session-ready.service plasma-xdg-desktop-por
 # ↑ For anything else you want to run ONLY in hyprland, keep following the pattern above
 
 chmod +x .local/bin/exec-app
-chmod +x /usr/local/bin/hyprland-session
-chmod +x /usr/local/bin/hyprland-session-ready
+sudo chmod +x /usr/local/bin/hyprland-session
+sudo chmod +x /usr/local/bin/hyprland-session-ready
 # THE FOLLOWING LINE IS DEPRECATED, AND MUCH HAS CHANGED HERE, IF YOU USED THE OLD METHOD WITH THIS FILE IN IT, PLEASE REVISIT THIS SECTION ASAP!
 # chmod +x /usr/local/bin/hyprland-session-teardown
 ```
