@@ -19,59 +19,47 @@ systemctl --user reset-failed 2>/dev/null || true
 
 systemctl --user start --wait hyprland.service
 
-# ── Logout detection ─────────────────────────────────────────────────────────
-# On an explicit logout, hyprland.service is fully inactive with no pending
-# jobs by the time --wait returns — Hyprland exited and nothing is queueing
-# it back up.
+# ── Logout cleanup ─────────────────────────────────────────────────────────
+# Tl;dr: On an explicit logout, hyprland.service is fully inactive with no
+# pending jobs by the time --wait returns — Hyprland exited and nothing is
+# queueing it back up. Cleanup your extra set env's in here.
 #
 # On a service restart (systemctl --user restart hyprland.service), systemd
 # enqueues the new start job atomically as part of the restart job chain
 # *before* the stop completes, so the job is already in the queue (and the
-# unit may already be activating) by the time --wait returns here.
+# unit may already be activating).
 #
-# Checking both ActiveState and the job queue together gives us a reliable,
-# race-free discriminator without sleeps or flag files.
-_hl_state=$(systemctl --user show hyprland.service \
-	--property=ActiveState --value 2>/dev/null || echo "inactive")
-_hl_jobs=$(systemctl --user list-jobs --no-legend 2>/dev/null \
-	| grep -c 'hyprland\.service' || true)
-
-if [[ "$_hl_state" != "active"     && \
-      "$_hl_state" != "activating" && \
-      "$_hl_jobs"  -eq 0 ]]; then
-
-	# True logout: tear down every env var this session imported so the
-	# next login starts from a clean slate in the systemd user manager.
-	#
-	# List mirrors hyprland-session-ready (import-environment block) plus
-	# the base session vars imported above, plus any hl.env() vars that
-	# dbus-update-activation-environment --systemd --all propagated.
-	# Keep this list in sync with environment_variables.lua and
-	# hyprland-session-ready whenever you add new hl.env() entries.
-	systemctl --user unset-environment		\
-		DISPLAY								\
-		WAYLAND_DISPLAY						\
-		PATH								\
-		XDG_BACKEND							\
-		XDG_SEAT							\
-		XDG_SESSION_CLASS					\
-		XDG_SESSION_ID						\
-		XDG_SESSION_TYPE					\
-		XDG_VTNR							\
-		HYPRLAND_CMD						\
-		XCURSOR_SIZE						\
-		HYPRCURSOR_SIZE						\
-		XCURSOR_THEME						\
-		QT_QPA_PLATFORM						\
-		QT_QPA_PLATFORMTHEME				\
-		XDG_MENU_PREFIX						\
-		GTK_THEME							\
-		GTK_USE_PORTAL						\
-		XDG_CURRENT_DESKTOP					\
-		XDG_SESSION_DESKTOP					\
-		2>/dev/null || true
-
-fi
+# On logout: --wait returns here and we proceed to tear down every
+# env var this session imported so the next login starts from
+# a clean slate in the systemd user manager.
+#
+# List mirrors hyprland-session-ready (import-environment block) plus
+# the base session vars imported above, plus any hl.env() vars that
+# dbus-update-activation-environment --systemd --all propagated.
+# Keep this list in sync with environment_variables.lua and
+# hyprland-session-ready whenever you add new hl.env() entries.
+systemctl --user unset-environment		\
+	DISPLAY								\
+	WAYLAND_DISPLAY						\
+	PATH								\
+	XDG_BACKEND							\
+	XDG_SEAT							\
+	XDG_SESSION_CLASS					\
+	XDG_SESSION_ID						\
+	XDG_SESSION_TYPE					\
+	XDG_VTNR							\
+	HYPRLAND_CMD						\
+	XCURSOR_SIZE						\
+	HYPRCURSOR_SIZE						\
+	XCURSOR_THEME						\
+	QT_QPA_PLATFORM						\
+	QT_QPA_PLATFORMTHEME				\
+	XDG_MENU_PREFIX						\
+	GTK_THEME							\
+	GTK_USE_PORTAL						\
+	XDG_CURRENT_DESKTOP					\
+	XDG_SESSION_DESKTOP					\
+	2>/dev/null || true
 # ── End logout detection ──────────────────────────────────────────────────────
 
 systemctl --user stop				\
