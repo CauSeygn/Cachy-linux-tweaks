@@ -64,12 +64,13 @@ else
     unit="app-${launcher}-${appid}@${random}"
 
     # Run it
-    exec systemd-run --user         \
-        --slice="$slice"            \
-        --unit="$unit"              \
-        --collect                   \
-        --description="$appid"      \
-        --service-type=exec         \
-        --property=ExitType=cgroup  \
+    exec systemd-run --user         				\
+        --slice="$slice"            				\
+        --unit="$unit"              				\
+        --collect                   				\
+        --description="$appid"      				\
+        --service-type=exec         				\
+        --property=ExitType=cgroup  				\
+        --property=PartOf=graphical-session.target	\
         -- "$@"
 fi
