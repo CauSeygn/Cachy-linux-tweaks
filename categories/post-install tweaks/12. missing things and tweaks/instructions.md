@@ -26,7 +26,6 @@ paru -S pipewire-jack
 When prompted, replace `jack2` or whatever by typing `y` then pressing enter; pipewire-jack supersedes it.
 
 ## Other (that I consider) missing stuff:
-
 ```sh
 paru -S kdenetwork-filesharing fuse2 kio-admin khelpcenter sshfs icoutils
 ```
@@ -46,7 +45,46 @@ If you want to use ssh to connect, the service needs to be enabled, you would th
 systemctl enable --now sshd
 ```
 
-#### Without the `--now` flag you either need to restart or run that but with the `start` argument. Make sure to modify ufw accordingly (I prefer disabling the firewall entirely as it's cumbersome and I'm not running a server).
+#### Without the `--now` flag you either need to restart or run that but with the `start` argument. Make sure to modify ufw accordingly.
+
+## ufw
+If you don't want to deal with the firewall whatsoever, open the terminal and run:
+```sh
+sudo ufw disable
+```
+If you do, instead diagnose the output of:
+```sh
+ss -tulpn
+```
+to see which ports you should let through on your machine, for example here I have my set of rules:
+```sh
+sudo ufw allow from 192.168.9.0/24 to any port 22 proto tcp comment 'SSH'
+sudo ufw allow from 192.168.9.200 comment 'My PC'
+sudo ufw allow from 192.168.9.190 comment 'Phone'
+sudo ufw allow from 192.168.9.0/24 to any port 1714:1764 proto tcp comment 'KDE Connect'
+sudo ufw allow from 192.168.9.0/24 to any port 1714:1764 proto udp comment 'KDE Connect'
+sudo ufw allow in on virbr0 comment 'VM'
+sudo ufw allow out on virbr0 comment 'VM'
+sudo ufw route allow in on virbr0 comment 'VM'
+sudo ufw route allow out on virbr0 comment 'VM'
+```
+if your firewall was previously disabled, enable it:
+```sh
+sudo ufw enable
+```
+and check the status:
+```sh
+sudo ufw status verbose
+# Or
+sudo ufw status numbered
+```
+whichever you prefer. To remove a rule, query with `numbered` then for example running:
+```sh
+sudo ufw delete 9
+```
+would remove the 9th rule in `numbered` output. To edit a rule's, add it exactly how you added it and just change it.
+
+My phone and my pc have static assigned ip addresses, so I trust those devices implicitly, `virbr0` — the virtual bridge device for my virtual machines is also implicitly trusted, the remaining three rules under the subnet mask of my local network (`192.168.9.0/24`) implicitly trust ssh and kde connect connections from other devices on my network (note that because I implicitly trust my phone, I could do away with needing a separate kde connect rule if that was the only device I intended to ever use kde connect on to connect to my pc).
 
 ## Replace SDDM with PLM
 As of january 2026, SDDM was replaced with Plasma Login Manager, new installs picking KDE won't ever see SDDM on it but existing users won't get automatically migrated. To migrate, first update your system:

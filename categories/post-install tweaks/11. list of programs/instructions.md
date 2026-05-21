@@ -18,18 +18,18 @@ This is my list of programs, which I use on Linux
 - Text editor: kate, micro, vscode (not vscodium), nano
 - Office suite: onlyoffice
 - Alarm: kalarm (kde), alarm clock (dms plugin, hyprland)
-- Virtual machines: qemu, virt-manager (check ufw or disable it)
-- Android emulator: genymotion (check ufw or disable it)
+- Virtual machines: qemu, virt-manager (check [ufw](../12.%20missing%20things%20and%20tweaks/instructions.md#ufw) or disable it)
+- Android emulator: genymotion (check [ufw](../12.%20missing%20things%20and%20tweaks/instructions.md#ufw) or disable it)
 - Emulators: pcsx2, rpcs3, ppsspp
 - GPU fan curve control: lact
 - Weather widget: weather widget plus (kde), in-built dms weather display (hyprland)
-- Phone<->PC connectivity: kde connect (check ufw or disable it), samba, material files (android), wormhole-rs
+- Phone<->PC connectivity: kde connect (check [ufw](../12.%20missing%20things%20and%20tweaks/instructions.md#ufw) or disable it), samba, material files (android), wormhole-rs
 - PC<->PC connectivity:samba, wormhole-rs
 - File searching and indexing: fsearch
 - System monitoring: btop, mission control, cpu-x, nvtop, nvitop (nvidia)
 - Diff program: meld
 - Project diff generator: kompare
-- Remote access: rustdesk (check ufw or disable it)
+- Remote access: rustdesk (check [ufw](../12.%20missing%20things%20and%20tweaks/instructions.md#ufw) or disable it)
 - Messaging, calls: signal desktop
 - Audio routing: qpwgraph, coppwr
 - Image upscaling: upscayl

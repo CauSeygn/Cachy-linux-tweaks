@@ -3,9 +3,8 @@ This is just a list of some settings I tweak for myself, for appearance and ever
 
 - Burger menu -> highlight changed settings
 - Mouse & touchpad -> screen edges -> disable everything
-- Keyboard -> delay: 300ms, rate: 50 repeats/s
+- Keyboard -> delay: 200ms, rate: 50 repeats/s
 - Accessibility -> shake cursor: disabled
-- Wi-fi & internet -> firewall: disabled
 - Colors & themes -> be original and change these yourself
 - Text & fonts -> fonts -> fonts: inter, subpixel: none, hinting: full
 - Notifications -> dnd mode: only while fullscreen app is focused
