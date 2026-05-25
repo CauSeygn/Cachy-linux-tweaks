@@ -84,7 +84,22 @@ sudo ufw delete 9
 ```
 would remove the 9th rule in `numbered` output. To edit a rule's, add it exactly how you added it and just change it.
 
-My phone and my pc have static assigned ip addresses, so I trust those devices implicitly, `virbr0` — the virtual bridge device for my virtual machines is also implicitly trusted, the remaining three rules under the subnet mask of my local network (`192.168.9.0/24`) implicitly trust ssh and kde connect connections from other devices on my network (note that because I implicitly trust my phone, I could do away with needing a separate kde connect rule if that was the only device I intended to ever use kde connect on to connect to my pc).
+My phone (`192.168.9.190`) and my pc (`192.168.9.200`) have static assigned ip addresses, so I trust those devices implicitly, `virbr0` — the virtual bridge device for my virtual machines is also implicitly trusted, the remaining three rules under the subnet mask of my local network (`192.168.9.0/24`) implicitly trust ssh and kde connect connections from other devices on my network (note that because I implicitly trust my phone, I could do away with needing a separate kde connect rule if that was the only device I intended to ever use kde connect on to connect to my pc). To easily scan for devices on my LAN, I would do:
+```sh
+nmap 192.168.9.0-255
+```
+Lastly, I let my router ping my device for mDNS discovery, which requires editing `/etc/ufw/before.rules` and adding:
+```sh
+# allow MULTICAST IGMP
+-A ufw-before-input -i enp42s0 -p igmp -j ACCEPT
+```
+before `COMMIT`, where `enp42s0` is my ethernet connection, identifiable via querying `ip address` (aliased as `ip a` or `ip addr` by default).
+
+Should you need to let anything else through, consult with:
+```sh
+journalctl -b 0 --grep "UFW"
+```
+and let through ip addresses that look familiar.
 
 ## Replace SDDM with PLM
 As of january 2026, SDDM was replaced with Plasma Login Manager, new installs picking KDE won't ever see SDDM on it but existing users won't get automatically migrated. To migrate, first update your system:
