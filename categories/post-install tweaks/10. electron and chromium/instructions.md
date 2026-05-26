@@ -1,8 +1,8 @@
 # Note:
-as of chromium 140 it now launches in native wayland, electron does as of 37; if your usage is nothing prior, and you're not an nVidia user, skip this section; if you are an nVidia user and use nothing prior, give this a read-through to familiarize yourself with how custom flags work but follow nothing until `HW Dec`; users of other GPU vendors should not follow `HW Dec`
+as of chromium 140 it now launches in native wayland, electron does as of 37; as of chromium 148 webgpu is enabled, electron has it enabled as of 42; if your usage is nothing prior to 42, and you're not an nVidia user, skip this section; if you are an nVidia user and use nothing prior to 37 but between 37-42, give this a read-through to familiarize yourself with how custom flags work but follow nothing until `HW Dec`; users of other GPU vendors should not follow `HW Dec`; if you run nothing prior to electron 42, skip this section completely
 
 # Preface
-These things when run in XWayland run poorly (on Wayland), to override that, launch the program as (in this case let's use freetube, an electron app):
+These things when run in XWayland run poorly (on Wayland), to override that, launch the program as (in this case let's use freetube, an electron app (at the time it depended on electron 34, this is no longer the case)):
 
 ```sh
 freetube --ozone-platform-hint=wayland --ozone-platform=wayland
@@ -26,21 +26,26 @@ as the contents, or use `electron34-flags.conf` to target only that one, but I r
 ## Other things also have their flags set similarly, consult the Arch wiki on chromium.
 
 # HW Dec (nVidia)
-Enabling hardware decoding is as of January 2026 already automatically handled in chromium if `libva-nvidia-driver` is present, but this isn't the case as of electron 39 (it might be in electron 40, remains to be seen). All you should do for browsers is set `CUDA_DISABLE_PERF_BOOST=1` in their `.desktop` file (see below).
+Enabling hardware decoding is as of January 2026 already automatically handled in chromium if `libva-nvidia-driver` is present, but this isn't the case as of electron 39 ~~(it might be in electron 40, remains to be seen)~~, as of electron 42/chromium 148 webgpu interop via gl and hardware decoding (electron 41+) are enabled by default. ~~All you should do for browsers is set `CUDA_DISABLE_PERF_BOOST=1` in their `.desktop` file (see below).~~ as of the time of revisiting this (may 2026), this env is globally applied.
 
-For electron, to enable it, the electron app first must be launched in wayland backend, then additional flags must be passed. For the sake of convenience, I will show both electron 34 (XWayland default) and electron 39 (Wayland default) examples:
+For electron, to enable it, the electron app first must be launched in wayland backend, then additional flags must be passed. For the sake of convenience, I will show electron 34 (XWayland default), electron 39 (Wayland default) and electron 42 (hwdec default) examples:
 
 ```sh
-CUDA_DISABLE_PERF_BOOST=1 freetube --ozone-platform-hint=wayland --ozone-platform=wayland --enable-features=AcceleratedVideoDecodeLinuxGL,VaapiOnNvidiaGPUs,AcceleratedVideoDecodeLinuxZeroCopyGL
+freetube --ozone-platform-hint=wayland --ozone-platform=wayland --enable-features=AcceleratedVideoDecodeLinuxGL,VaapiOnNvidiaGPUs,AcceleratedVideoDecodeLinuxZeroCopyGL
 ```
 
 ```sh
-CUDA_DISABLE_PERF_BOOST=1 vesktop --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,AcceleratedVideoDecodeLinuxZeroCopyGL,VaapiIgnoreDriverChecks
+vesktop --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,AcceleratedVideoDecodeLinuxZeroCopyGL,VaapiIgnoreDriverChecks
 ```
-the listed environment allows the GPU to go to lower powerstates instead of getting pinned to at least P2, resulting in actual efficient hardware decoding. With hardware decoding enabled, HEVC videos in electron (discord) will play.
+
+```sh
+stremio-enhanced
+#Waow, such complicated, i kneel
+```
+the crossed out environment above allows the GPU to go to lower powerstates instead of getting pinned to at least P2, resulting in actual efficient hardware decoding. With hardware decoding enabled, HEVC videos in electron (discord) will play.
 
 ## In KDE's menu editor vesktop's entry would look like:
 
-- Environment Variables: `CUDA_DISABLE_PERF_BOOST=1`
+- Environment Variables: ~~`CUDA_DISABLE_PERF_BOOST=1`~~
 - Program: `vesktop`
 - Command-line arguments: `--enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,AcceleratedVideoDecodeLinuxZeroCopyGL,VaapiIgnoreDriverChecks %U`
