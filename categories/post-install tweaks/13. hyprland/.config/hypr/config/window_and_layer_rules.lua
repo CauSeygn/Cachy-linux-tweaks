@@ -24,7 +24,7 @@ hl.window_rule({
         class = "^$",
         title = "^$",
         xwayland = true,
-    float = true,
+        float = true,
         fullscreen = false,
         pin = false,
     },
@@ -57,8 +57,8 @@ hl.window_rule({
 hl.window_rule({
     name = "aimp-main-app",
     match = {
-    initial_class = "aimp.exe",
-    initial_title = "^$",
+        initial_class = "aimp.exe",
+        initial_title = "^$",
     },
     no_initial_focus = true,
 })
@@ -241,12 +241,12 @@ hl.window_rule({
 
 hl.window_rule({
     name = "dialog-windows-3",
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
     match = {
         title = "^(Select a File)(.*)$",
     },
+    center = true,
+    float = true,
+    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
 })
 
 hl.window_rule({
