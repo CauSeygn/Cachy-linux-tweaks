@@ -1,0 +1,11 @@
+[Unit]
+Description=Prevent kded6 from stealing statusnotifierwatcher
+PartOf=hyprland-session.target
+After=dbus.socket
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/sni-guard
+
+[Install]
+WantedBy=hyprland-session.target

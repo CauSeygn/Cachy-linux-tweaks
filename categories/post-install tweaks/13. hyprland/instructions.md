@@ -80,6 +80,13 @@ systemctl --user add-wants hyprland-session-ready.service hyprpolkitagent.servic
 systemctl --user add-wants hyprland-session-ready.service plasma-xdg-desktop-portal-kde.service
 # ↑ For anything else you want to run ONLY in hyprland, keep following the pattern above
 
+# Please look at:
+#
+# https://github.com/wsnrq/sni-guard
+#
+# and obtain for yourself the binary, following repo instructions
+systemctl --user enable hyprland-kded6-sni-disable.service
+
 chmod +x .local/bin/exec-app
 sudo chmod +x /usr/local/bin/hyprland-session
 sudo chmod +x /usr/local/bin/hyprland-session-ready
@@ -118,9 +125,9 @@ this will copy the relevant paths to root's configs.
 
 2. Press `Win|Super + h` so you can easily view your keybinds. This relies on parsing `~/.config/hypr/dms/binds.conf`. I advise you to explicitly NOT include ANYTHING in this folder in your Hyprland config as an include, but rather keep it entirely separate and duplicate your binds from `keybinds.lua` into it at your leisure **MIND THE SYNTAX AS OF 0.55 (it is still hyprlang, not lua)**, the rest of the things here do nothing and may be omitted. Likewise, ignore all complaints `DMS` gives you on first run and do not let it generate things for you (or do, what do I care?).
 
-3. I suggest restarting DMS with:
+3. I suggest restarting DMS with (again, look at https://github.com/wsnrq/sni-guard if you missed it, otherwise you additionally have to repeatedly `killall kded6` until it faults, to return your tray):
 ```sh
-killall kded6 && systemctl --user restart dms.service || systemctl --user restart dms.service
+systemctl --user restart dms.service
 ```
 you can make this a custom button in the bar menu by adding the `Dank Actions` plugin from `Settings -> Plugins -> Browse`, then once set up `Dank Bar -> Widgets -> Dank Actions - howYouNamedItHere`. For the icon I use `restart_alt`. If you neglect to kill `kded6` and it is running, your tray will get hijacked. Likewise if it is not running, the first command will error out and do nothing, which is why the conditional exists.
 
