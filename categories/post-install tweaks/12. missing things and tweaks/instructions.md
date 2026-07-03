@@ -19,7 +19,7 @@ Open the terminal and run:
 ```sh
 paru -Qs jack
 ```
-if you get out of `pipewire-jack` - great, move on from here - if you do not get output of `pipewire-jack`, run:
+if you get an output of `pipewire-jack` - great, move on from here - if you do not get an output of `pipewire-jack`, run:
 ```sh
 paru -S pipewire-jack
 ```
@@ -82,7 +82,7 @@ whichever you prefer. To remove a rule, query with `numbered` then for example r
 ```sh
 sudo ufw delete 9
 ```
-would remove the 9th rule in `numbered` output. To edit a rule's, add it exactly how you added it and just change it.
+would remove the 9th rule in `numbered` output. To edit a rule, add it exactly how you added it and just change it.
 
 My phone (`192.168.9.190`) and my pc (`192.168.9.200`) have static assigned ip addresses, so I trust those devices implicitly, `virbr0` — the virtual bridge device for my virtual machines is also implicitly trusted, the remaining three rules under the subnet mask of my local network (`192.168.9.0/24`) implicitly trust ssh and kde connect connections from other devices on my network (note that because I implicitly trust my phone, I could do away with needing a separate kde connect rule if that was the only device I intended to ever use kde connect on to connect to my pc). To easily scan for devices on my LAN, I would do:
 ```sh
@@ -106,10 +106,6 @@ As of january 2026, SDDM was replaced with Plasma Login Manager, new installs pi
 ```sh
 paru
 ```
-then check whether your mirror is holding at least version 6.5.90 (anything less is buggy, rank your mirrors):
-```sh
-pacman -Ss plasma-login-manager
-```
 then run:
 ```sh
 sudo pacman -S plasma-login-manager && sudo systemctl disable sddm && sudo systemctl enable plasmalogin && sudo pacman -R sddm-kcm cachyos-themes-sddm sddm layer-shell-qt5
@@ -129,7 +125,7 @@ Second, use your favorite text editor and open `/etc/limine-snapper-sync.conf`, 
 MAX_SNAPSHOT_ENTRIES
 EXCLUDE_SNAPSHOT_TYPES
 ```
-change these to **(note that the `5` in my case should in your case encompass the amounts you set above for the `timeline` section as discussed just above; so say that you've set `4/3/1/0`, you'd want to store `8`; again, your `/boot` partition size is the limit here, with 4/1/0/0 and 2 kernels, my `/boot` fluctuates between `~800mib-1.3gib/2gib`)**:
+change these to **(note that the `5` in my case should in your case encompass the amounts you set above for the `timeline` section as discussed just above; so say that you've set `4/3/1/0`, you'd want to store `8`; again, your `/boot` partition size is the limit here, with 4/1/0/0 and 2 kernels, my `/boot` fluctuates between `~800mib-1.3gib/2gib` usually, depending on my update frequency and how many kernel versions get stored in eligible snapshots)**:
 ```sh
 MAX_SNAPSHOT_ENTRIES=5
 EXCLUDE_SNAPSHOT_TYPES="pre, post"

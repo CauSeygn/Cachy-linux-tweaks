@@ -1,7 +1,7 @@
 # Note:
 as of chromium 140 it now launches in native wayland, electron does as of 37; as of chromium 148 webgpu is enabled, electron has it enabled as of 42; if your usage is nothing prior to 42, and you're not an nVidia user, skip this section; if you are an nVidia user and use nothing prior to 37 but between 37-42, give this a read-through to familiarize yourself with how custom flags work but follow nothing until `HW Dec`; users of other GPU vendors should not follow `HW Dec`; if you run nothing prior to electron 42, skip this section completely
 
-# Preface
+# Preface (historical, see note)
 These things when run in XWayland run poorly (on Wayland), to override that, launch the program as (in this case let's use freetube, an electron app (at the time it depended on electron 34, this is no longer the case)):
 
 ```sh
@@ -21,12 +21,12 @@ you can make a file in `~/.config/` named `electron-flags.conf` and put:
 --ozone-platform=wayland
 ```
 as the contents, or use `electron34-flags.conf` to target only that one, but I recommend doing it app by app instead.
-#### (as mentioned up top this is slowly being phased out and made default but discord will probably still be on XWayland till 2050; as of chromium 140 & electron 37 these flags are unneeded, prior electron versions still need these)
+### (as of chromium 140 & electron 37 these flags are unneeded, prior electron versions still need these, these are increasingly rarer and the example above is kept for version flag targeting purposes and is no longer relevant)
 
 ## Other things also have their flags set similarly, consult the Arch wiki on chromium.
 
 # HW Dec (nVidia)
-Enabling hardware decoding is as of January 2026 already automatically handled in chromium if `libva-nvidia-driver` is present, but this isn't the case as of electron 39 ~~(it might be in electron 40, remains to be seen)~~, as of electron 42/chromium 148 webgpu interop via gl and hardware decoding (electron 41+) are enabled by default. ~~All you should do for browsers is set `CUDA_DISABLE_PERF_BOOST=1` in their `.desktop` file (see below).~~ as of the time of revisiting this (may 2026), this env is globally applied.
+Enabling hardware decoding is as of January 2026 already automatically handled in chromium if `libva-nvidia-driver` is present, but this isn't the case as of electron 39 ~~(it might be in electron 40, remains to be seen)~~, as of electron 42/chromium 148 webgpu interop via gl and hardware decoding (electron 41+) are enabled by default (hwdec is disabled by default on chromium 149 and again requires flags, thanks Google). ~~All you should do for browsers is set `CUDA_DISABLE_PERF_BOOST=1` in their `.desktop` file (see below).~~ as of the time of revisiting this (may 2026), this env is globally applied.
 
 For electron, to enable it, the electron app first must be launched in wayland backend, then additional flags must be passed. For the sake of convenience, I will show electron 34 (XWayland default), electron 39 (Wayland default) and electron 42 (hwdec default) examples:
 
@@ -40,7 +40,10 @@ vesktop --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,
 
 ```sh
 stremio-enhanced
-#Waow, such complicated, i kneel
+# Waow, such complicated, i kneel
+#
+# However you might want to use the above one for vesktop,
+# since Google can't decide if it wants it enabled or disabled practically every version
 ```
 the crossed out environment above allows the GPU to go to lower powerstates instead of getting pinned to at least P2, resulting in actual efficient hardware decoding. With hardware decoding enabled, HEVC videos in electron (discord) will play.
 

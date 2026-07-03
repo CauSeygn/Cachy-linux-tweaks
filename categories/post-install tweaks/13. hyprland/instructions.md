@@ -5,7 +5,8 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 `~/.config/hypr/*`\
 `/etc/systemd/user/hyprland-*` (user systemd files for the wm start)\
 `/usr/local/bin/hyprland-*`\
-`/usr/share/wayland-sessions/hyprland-systemd.desktop` (user systemd files for the wm end)\
+`/usr/share/wayland-sessions/hyprland-systemd.desktop`\
+`~/.config/systemd/user/hyprland-kded6-sni-disable.service` (user systemd files for the wm end)\
 `~/.config/xdg-desktop-portal/`\
 `~/.config/gtk-3.0/*` (theming start)\
 `~/.config/gtk-4.0/*`\
@@ -90,8 +91,6 @@ systemctl --user enable hyprland-kded6-sni-disable.service
 chmod +x .local/bin/exec-app
 sudo chmod +x /usr/local/bin/hyprland-session
 sudo chmod +x /usr/local/bin/hyprland-session-ready
-# THE FOLLOWING LINE IS DEPRECATED, AND MUCH HAS CHANGED HERE, IF YOU USED THE OLD METHOD WITH THIS FILE IN IT, PLEASE REVISIT THIS SECTION ASAP!
-# chmod +x /usr/local/bin/hyprland-session-teardown
 ```
 ## Now you can reboot into `Hyprland-systemd`
 (I trust you copied everything provided, otherwise you're on your own.)
