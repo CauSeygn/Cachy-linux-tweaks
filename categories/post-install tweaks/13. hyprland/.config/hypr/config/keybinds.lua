@@ -33,8 +33,8 @@ hl.bind(mainMod .. " + C", hl.dsp.window.close()) -- Kill Active Window
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager)) -- File Manager
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" })) -- Toggle Floating
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" })) -- Toggle Fullscreen
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd(emoji))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu)) -- Toggle Launcher
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd(emoji)) -- Emoji Menu
 hl.bind(mainMod .. " + period", hl.dsp.layout("colresize +conf")) -- Bigger Column
 hl.bind(mainMod .. " + comma", hl.dsp.layout("colresize -conf")) -- Smaller Column
 hl.bind(mainMod .. " + X", hl.dsp.layout("move +col")) -- Next Column
@@ -46,10 +46,10 @@ hl.bind("SHIFT + Print", hl.dsp.exec_cmd(screenshotUtilEdit)) -- Take and edit a
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(clipboard)) -- Clipboard Manager
 
 -- 2. Window Management:
-hl.bind(mainMod .. " + W", hl.dsp.window.swap({ direction = "up" }))
-hl.bind(mainMod .. " + A", hl.dsp.layout("consume_or_expel prev"))
-hl.bind(mainMod .. " + S", hl.dsp.window.swap({ direction = "down" }))
-hl.bind(mainMod .. " + D", hl.dsp.layout("consume_or_expel next"))
+hl.bind(mainMod .. " + W", hl.dsp.window.swap({ direction = "up" })) -- Move Window in Column Up
+hl.bind(mainMod .. " + A", hl.dsp.layout("consume_or_expel prev")) -- Move Window (to Column) Left
+hl.bind(mainMod .. " + S", hl.dsp.window.swap({ direction = "down" })) -- Move Window in Column Down
+hl.bind(mainMod .. " + D", hl.dsp.layout("consume_or_expel next")) -- Move Window (to Column) Right
 
 -- 3. Workspace Management:
 for i = 1, 10 do

@@ -122,20 +122,20 @@ this will copy the relevant paths to root's configs.
 1. Open the settings menu, and go to `Dock & Launcher -> Launcher -> Launch Prefix`. In the field put `exec-app`. This is the prefix that will run everything through SystemD in its own neatly-named services. If you wish to edit its functionality, simply open it (`~/.local/bin/exec-app`) in a text editor, as it is a bash script.
 #### (snaps are untested, if you have issues, then catch their naming and modify the script by attempting to follow what is done for flatpaks (aka omit the entire formatting) instead)
 
-2. Press `Win|Super + h` so you can easily view your keybinds. This relies on parsing `~/.config/hypr/dms/binds.conf`. I advise you to explicitly NOT include ANYTHING in this folder in your Hyprland config as an include, but rather keep it entirely separate and duplicate your binds from `keybinds.lua` into it at your leisure **MIND THE SYNTAX AS OF 0.55 (it is still hyprlang, not lua)**, the rest of the things here do nothing and may be omitted. Likewise, ignore all complaints `DMS` gives you on first run and do not let it generate things for you (or do, what do I care?).
+2. Press `Win|Super + h` so you can easily view your keybinds. This parses your keybinds.lua. I advise you to explicitly NOT include ANYTHING from DMS's own settings in your Hyprland config as an include, but rather manually add your own stuff at your leisure. Likewise, ignore all complaints `DMS` gives you on first run and do not let it generate things for you (or do, what do I care?).
 
 3. I suggest restarting DMS with (again, look at https://github.com/wsnrq/sni-guard if you missed it, otherwise you additionally have to repeatedly `killall kded6` until it faults, to return your tray):
 ```sh
 systemctl --user restart dms.service
 ```
-you can make this a custom button in the bar menu by adding the `Dank Actions` plugin from `Settings -> Plugins -> Browse`, then once set up `Dank Bar -> Widgets -> Dank Actions - howYouNamedItHere`. For the icon I use `restart_alt`. If you neglect to kill `kded6` and it is running, your tray will get hijacked. Likewise if it is not running, the first command will error out and do nothing, which is why the conditional exists.
+you can make this a custom button in the bar menu by adding the `Dank Actions` plugin from `Settings -> Plugins -> Browse`, then once set up `Dank Bar -> Widgets -> Dank Actions - howYouNamedItHere`. For the icon I use `restart_alt`.
 
 Similarly, you can restart Hyprland from within Hyprland via:
 ```sh
 systemctl --user restart hyprland.service
 ```
-of course, you can also simply log out, however this is mainly for if you encounter hard crashes. Whether you
-choose to use this, or how (via dms, hl.bind, manually...), is up to you.
+of course, you can also simply log out, however this is mainly for if you encounter hard crashes. Whether you choose to use this, or how (via dms, hl.bind, manually...), is up to you.
+
 # From here on feel free to customize things yourself.
 ### https://wiki.hypr.land/
 ### https://danklinux.com/docs/
