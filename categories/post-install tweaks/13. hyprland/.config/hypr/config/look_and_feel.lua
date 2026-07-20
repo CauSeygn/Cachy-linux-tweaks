@@ -75,8 +75,8 @@ hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}
 hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}  }     })
 
 -- Springs
-hl.curve("relaxed",        { type = "spring", mass = 1, stiffness = 56, dampening = 14 })
-hl.curve("snappy",         { type = "spring", mass = 1, stiffness = 86, dampening = 17 })
+hl.curve("relaxed",        { type = "spring", mass = 1, stiffness = 176, dampening = 29 })
+hl.curve("snappy",         { type = "spring", mass = 1, stiffness = 256, dampening = 34 })
 
 -- Animations
 hl.animation({ leaf = "global",        enabled = true, speed = 10,   bezier = "default"                           })
