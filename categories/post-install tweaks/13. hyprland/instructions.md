@@ -32,9 +32,9 @@ paru
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland aur/quickshell-git dms-shell-git cava wl-clipboard kitty qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie hyprshot clipse dconf-editor
+paru -S hyprland quickshell-git dms-shell-git cava wl-clipboard kitty qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie hyprshot clipse dconf-editor
 ```
-This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies). You will also have to decide which `quickshell` you want to use going forward, I recommend `aur/quickshell-git` (`paru -S aur/quickshell-git` as updates are available), but this may become annoying to you (it will require manual updating as the package was hijacked by CachyOS, sadly, and is not up to date with upstream -git; bad for non-stable software).
+This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies).
 
 Note that you may also want `nwg-look` (theming) and `dconf-editor` (other stuff such as removing menu buttons, for example) to customize GTK apps, alternatively re-log back into KDE and change GTK looks there.
 
