@@ -14,13 +14,11 @@
 # you must restart it, or do the usual logout/reboot, as you prefer if restarting it doesn't work
 
 # Is it a flatpak? if so, there's no point in trying to wrap it into this, and we skip to the end
-flatpak=$(printf "$@" | grep flatpak)
-
-# Is it an appimage? If so, you may wish to uncomment what is right below flatpak, in case you ever see issues (unlikely)
-appimage=$(printf "$@" | grep appimage)
-if [ -n "$flatpak" ]; then
+# Flatpaks always launch as "flatpak run ...", so we only need to check the first word
+if [ "$1" = "flatpak" ]; then
     exec "$@"
-# elif [ -n "$appimage" ]; then
+# Is it an appimage? Uncomment below (and the check above it) in case you ever see issues (unlikely)
+# elif printf '%s\n' "$@" | grep -qi appimage; then
 #     exec "$@"
 else
     # Modify the launcher prefix:
@@ -39,26 +37,23 @@ else
     # firstword - appimages
     #
     appid=$(printf '%s\n' "$@"                                              \
-        | sed 's/^env\s*//'                                                 \
-        | sed '/^[A-Z_][A-Z0-9_]*=/d'                                       \
-        | sed 's|^\./||'                                                    \
-        | sed 's|^\/usr/bin/||'                                             \
-        | sed 's|[^a-zA-Z0-9].*\.appimage$||'                               \
-        | sed '/^--[^ ]/d'                                                  \
-        | sed -e "/^start$/d"                                               \
+        | sed -e 's/^env\s*//'                                              \
+              -e '/^[A-Z_][A-Z0-9_]*=/d'                                    \
+              -e 's|^\./||'                                                 \
+              -e 's|^\/usr/bin/||'                                          \
+              -e 's|[^a-zA-Z0-9].*\.appimage$||'                            \
+              -e '/^--[^ ]/d'                                               \
+              -e "/^start$/d"                                               \
               -e "/^\/unix$/d"                                              \
               -e "/^%f$/d"                                                  \
               -e 's|^'"$HOME"'/[^[:space:]]*\/\(.*\)\.[eE][xX][eE]$|\1|'    \
-        | grep -v '^$'                                                      \
+              -e '/^$/d'                                                    \
         | sed '$!s/\([^-\]\)$/\1-/'                                         \
         | tr -cd '[:alnum:]-'                                               \
         | tr '[:upper:]' '[:lower:]')
 
     # Generate random instance id (collision-resistant)
-    random=$(openssl rand -hex 6)
-
-    # Give it a name, using the sensible ApplicationID
-    description="$appid"
+    random=$(od -An -tx1 -N6 /dev/urandom | tr -d ' \n')
 
     # Structure it accordingly
     unit="app-${launcher}-${appid}@${random}"
