@@ -105,11 +105,11 @@ _desktop_lookup_by_exec() {
 # Turn a .desktop Name= value ("Brave Web Browser") into the same slug
 # format the path-based fallback below produces ("brave-web-browser").
 _format_desktop_name() {
-    printf '%s' "$1"                \
-        | tr -s '[:space:]' '-'     \
-        | tr -cd '[:alnum:]-'       \
-        | tr -s '-'                 \
-        | sed -e 's/^-//' -e 's/-$//' \
+    printf '%s' "$1"					\
+        | tr -s '[:space:]' '-'			\
+        | tr -cd '[:alnum:]-'			\
+        | tr -s '-'						\
+        | sed -e 's/^-//' -e 's/-$//'	\
         | tr '[:upper:]' '[:lower:]'
 }
 
@@ -117,7 +117,7 @@ _format_desktop_name() {
 # Flatpaks always launch as "flatpak run ...", so we only need to check the first word
 if [ "$1" = "flatpak" ]; then
     exec "$@"
-# Is it an appimage? Uncomment below (and the check above it) in case you ever see issues (unlikely)
+# Is it an appimage? Uncomment the two lines below in case you ever see issues (unlikely)
 # elif printf '%s\n' "$@" | grep -qi appimage; then
 #     exec "$@"
 else
@@ -190,9 +190,9 @@ else
         if [ -n "$_desktop_name" ]; then
             appid=$(_format_desktop_name "$_desktop_name")
         else
-            appid=$(printf '%s\n' "$_filtered"          \
-                | sed '$!s/\([^-\]\)$/\1-/'              \
-                | tr -cd '[:alnum:]-'                    \
+            appid=$(printf '%s\n' "$_filtered"	\
+                | sed '$!s/\([^-\]\)$/\1-/'		\
+                | tr -cd '[:alnum:]-'			\
                 | tr '[:upper:]' '[:lower:]')
         fi
 
