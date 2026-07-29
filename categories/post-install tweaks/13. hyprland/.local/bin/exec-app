@@ -3,7 +3,7 @@
 # Usage:
 #
 # Modify the launcher and slice variables, optionally try your hand at filtering stuff
-# in appid before the grep, don't touch anything else
+# in appid before the `-e "/^%f$/d"`, don't touch anything else
 # once done, save as exec-app (or whatever else you like, just make sure that the name isn't already some
 # other binary name that exists), place into ~/.local/bin/ and make executable
 # call by running "exec-app somebinary" (or whatever you named it)
