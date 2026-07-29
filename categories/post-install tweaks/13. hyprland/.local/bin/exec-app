@@ -12,12 +12,97 @@
 # NOTE:
 # If you had to create ~/.local/bin/ it will not be known to DMS as part of $PATH if it's already running
 # you must restart it, or do the usual logout/reboot, as you prefer if restarting it doesn't work
+#
+# Toggle: try to resolve a proper app name from a matching .desktop file's Name=
+# before falling back to guessing one from the launched binary/path
+# Costs roughly an extra ~10-15ms per launch on my machine (20-25ms → 30-40ms, scans installed .desktop files → caches → refreshes cold cache if too cold)
+# on a cache miss; cached hits cost about the same, or slightly less as no lookup at all
+# Set to 0 to skip it entirely.
+use_desktop_names=1
+
+# How many days a cached name is trusted before being recomputed
+# (handles apps getting updated/renamed without needing a manual cache clear)
+cache_ttl_days=7
+
+# Where resolved names get cached, keyed per exact invocation
+_cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/exec-app"
+_cache_file="$_cache_dir/cache.txt"
+_cache_ttl=$(( cache_ttl_days * 86400 ))
+
+# Where .desktop files live, per the XDG base-dir spec
+_desktop_dirs() {
+    printf '%s\n' "${XDG_DATA_HOME:-$HOME/.local/share}/applications"
+    IFS=: read -ra _dd <<< "${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+    for _d in "${_dd[@]}"; do printf '%s\n' "$_d/applications"; done
+}
+
+# Given a bare binary basename (e.g. "brave-browser-stable"), scan .desktop
+# files for one whose Exec= resolves to that same basename (after stripping
+# a leading "env VAR=VAL ..." prefix and any path component), skipping
+# NoDisplay/Hidden entries and ignoring [Desktop Action ...] sub-sections.
+# Prints that entry's Name= if found, nothing otherwise.
+_desktop_lookup_by_exec() {
+    local target="$1" f _files=()
+    while IFS= read -r d; do
+        [ -d "$d" ] || continue
+        for f in "$d"/*.desktop; do
+            [ -e "$f" ] && _files+=("$f")
+        done
+    done < <(_desktop_dirs)
+    [ "${#_files[@]}" -eq 0 ] && return
+    awk -v target="$target" '
+        function check() {
+            if (!found && matched && !skip && name != "") { found=1; print name; exit }
+        }
+        FNR==1 { check(); in_entry=0; skip=0; name=""; matched=0 }
+        /^\[Desktop Entry\]/ { in_entry=1; next }
+        /^\[/ { in_entry=0 }
+        in_entry && /^NoDisplay=true/ { skip=1 }
+        in_entry && /^Hidden=true/ { skip=1 }
+        in_entry && /^Name=/ && name=="" { name=substr($0,6) }
+        in_entry && /^Exec=/ {
+            execval=substr($0,6)
+            if (execval ~ /^env[ \t]+/) {
+                sub(/^env[ \t]+/, "", execval)
+                while (execval ~ /^[A-Za-z_][A-Za-z0-9_]*=[^ \t]*[ \t]*/) {
+                    sub(/^[A-Za-z_][A-Za-z0-9_]*=[^ \t]*[ \t]*/, "", execval)
+                }
+            }
+            n = split(execval, toks, /[ \t]/)
+            cmd = toks[1]
+            sub(/.*\//, "", cmd)
+            # A bare "-e" means this entry is really about whatever follows
+            # it (e.g. Exec=kitty -e btop is about btop, not kitty) --
+            # detected generically, no hardcoded terminal names
+            for (ti=1; ti<=n; ti++) {
+                if (toks[ti] == "-e" && ti < n) {
+                    cmd = toks[ti+1]
+                    sub(/.*\//, "", cmd)
+                    break
+                }
+            }
+            if (cmd == target) matched=1
+        }
+        END { check() }
+    ' "${_files[@]}" 2>/dev/null
+}
+
+# Turn a .desktop Name= value ("Brave Web Browser") into the same slug
+# format the path-based fallback below produces ("brave-web-browser").
+_format_desktop_name() {
+    printf '%s' "$1"					\
+        | tr -s '[:space:]' '-'			\
+        | tr -cd '[:alnum:]-'			\
+        | tr -s '-'						\
+        | sed -e 's/^-//' -e 's/-$//'	\
+        | tr '[:upper:]' '[:lower:]'
+}
 
 # Is it a flatpak? if so, there's no point in trying to wrap it into this, and we skip to the end
 # Flatpaks always launch as "flatpak run ...", so we only need to check the first word
 if [ "$1" = "flatpak" ]; then
     exec "$@"
-# Is it an appimage? Uncomment below (and the check above it) in case you ever see issues (unlikely)
+# Is it an appimage? Uncomment the two lines below in case you ever see issues (unlikely)
 # elif printf '%s\n' "$@" | grep -qi appimage; then
 #     exec "$@"
 else
@@ -36,24 +121,78 @@ else
     # firstword-word-word-...-finalword - regular binaries
     # firstword - appimages
     #
-    appid=$(printf '%s\n' "$@"                                              \
-        | sed -e 's/^env\s*//'                                              \
-              -e '/^[A-Z_][A-Z0-9_]*=/d'                                    \
-              -e 's|^\./||'                                                 \
-              -e 's|^\/usr/bin/||'                                          \
-              -e 's|[^a-zA-Z0-9].*\.appimage$||'                            \
-              -e '/^--[^ ]/d'                                               \
-              -e "/^start$/d"                                               \
-              -e "/^\/unix$/d"                                              \
-              -e "/^%f$/d"                                                  \
-              -e 's|^'"$HOME"'/[^[:space:]]*\/\(.*\)\.[eE][xX][eE]$|\1|'    \
-              -e '/^$/d'                                                    \
-        | sed '$!s/\([^-\]\)$/\1-/'                                         \
-        | tr -cd '[:alnum:]-'                                               \
-        | tr '[:upper:]' '[:lower:]')
+    # Cache key is the exact invocation, so repeats skip straight past
+    # everything below (filtering, desktop lookup, formatting)
+    _key=$(printf '%s\x1f' "$@")
+    _now=$EPOCHSECONDS
+    appid=""
 
-    # Generate random instance id (collision-resistant)
-    random=$(od -An -tx1 -N6 /dev/urandom | tr -d ' \n')
+    # Pure-bash cache read: no forking date/awk just to check a cache hit
+    if [ -f "$_cache_file" ]; then
+        while IFS=$'\t' read -r _ckey _cappid _cts; do
+            if [ "$_ckey" = "$_key" ]; then
+                (( _now - _cts < _cache_ttl )) && appid="$_cappid"
+                break
+            fi
+        done < "$_cache_file"
+    fi
+
+    if [ -z "$appid" ]; then
+        # A bare "-e" anywhere means naming should follow the payload after
+        # it, not the terminal running it (e.g. "kitty -e btop" is btop) --
+        # same generic rule as in _desktop_lookup_by_exec above
+        _naming_args=("$@")
+        for ((_i=0; _i<${#_naming_args[@]}; _i++)); do
+            if [ "${_naming_args[_i]}" = "-e" ]; then
+                _naming_args=("${_naming_args[@]:_i+1}")
+                break
+            fi
+        done
+
+        # Filtering pass: strips env-prefixes, flags, placeholders, path components,
+        # etc. Its first surviving line is also what we match against installed
+        # .desktop files' Exec= (see use_desktop_names above), since that's always
+        # the actual binary name regardless of how many extra args got passed.
+        _filtered=$(printf '%s\n' "${_naming_args[@]}"                          \
+            | sed -e 's/^env\s*//'                                              \
+                  -e '/^[A-Z_][A-Z0-9_]*=/d'                                    \
+                  -e 's|^\./||'                                                 \
+                  -e 's|^\/usr/bin/||'                                          \
+                  -e 's|[^a-zA-Z0-9].*\.appimage$||'                            \
+                  -e '/^--[^ ]/d'                                               \
+                  -e "/^start$/d"                                               \
+                  -e "/^\/unix$/d"                                              \
+                  -e "/^%f$/d"                                                  \
+                  -e 's|^'"$HOME"'/[^[:space:]]*\/\(.*\)\.[eE][xX][eE]$|\1|'    \
+                  -e '/^$/d')
+
+        _target=$(printf '%s\n' "$_filtered" | head -n1)
+        _desktop_name=""
+        [ "$use_desktop_names" = "1" ] && _desktop_name=$(_desktop_lookup_by_exec "$_target")
+
+        if [ -n "$_desktop_name" ]; then
+            appid=$(_format_desktop_name "$_desktop_name")
+        else
+            appid=$(printf '%s\n' "$_filtered"	\
+                | sed '$!s/\([^-\]\)$/\1-/'		\
+                | tr -cd '[:alnum:]-'			\
+                | tr '[:upper:]' '[:lower:]')
+        fi
+
+        # Cache the result: dedupe old entry for this exact key, then append
+        mkdir -p "$_cache_dir"
+        (
+            flock -w 2 9 || exit 0
+            awk -F'\t' -v key="$_key" '$1 != key' "$_cache_file" 2>/dev/null > "$_cache_file.tmp"
+            printf '%s\t%s\t%s\n' "$_key" "$appid" "$_now" >> "$_cache_file.tmp"
+            mv "$_cache_file.tmp" "$_cache_file"
+        ) 9>"$_cache_file.lock"
+    fi
+
+    # Generate random instance id (collision-resistant, not cryptographic --
+    # just needs to avoid clashing with other running instances). Pure bash
+    # $RANDOM instead of od/tr avoids forking two more processes for it.
+    random=$(printf '%04x%04x%04x' $RANDOM $RANDOM $RANDOM)
 
     # Structure it accordingly
     unit="app-${launcher}-${appid}@${random}"
