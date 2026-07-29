@@ -36,13 +36,16 @@ _desktop_dirs() {
     for _d in "${_dd[@]}"; do printf '%s\n' "$_d/applications"; done
 }
 
-# Given a bare binary basename (e.g. "brave-browser-stable"), scan .desktop
-# files for one whose Exec= resolves to that same basename (after stripping
-# a leading "env VAR=VAL ..." prefix and any path component), skipping
-# NoDisplay/Hidden entries and ignoring [Desktop Action ...] sub-sections.
-# Prints that entry's Name= if found, nothing otherwise.
+# Given a bare binary basename (e.g. "brave-browser-stable") and the full,
+# already-filtered invocation joined by \x1f, scan .desktop files for a
+# match. Two tiers: an exact full-line match wins first (needed for
+# launchers like Lutris/Heroic/Bottles where one binary serves many
+# entries, differentiated only by a trailing game-id argument); if nothing
+# matches exactly, fall back to matching just the leading binary's
+# basename (the common case, where extra flags don't matter). Skips
+# NoDisplay/Hidden entries and ignores [Desktop Action ...] sub-sections.
 _desktop_lookup_by_exec() {
-    local target="$1" f _files=()
+    local target="$1" full_target="$2" f _files=()
     while IFS= read -r d; do
         [ -d "$d" ] || continue
         for f in "$d"/*.desktop; do
@@ -50,11 +53,15 @@ _desktop_lookup_by_exec() {
         done
     done < <(_desktop_dirs)
     [ "${#_files[@]}" -eq 0 ] && return
-    awk -v target="$target" '
-        function check() {
-            if (!found && matched && !skip && name != "") { found=1; print name; exit }
+    awk -v target="$target" -v full_target="$full_target" '
+        BEGIN { US = sprintf("%c", 31) }
+        function finalize_file() {
+            if (!skip && name != "") {
+                if (strict_matched && strict_name == "") strict_name = name
+                if (matched && loose_name == "") loose_name = name
+            }
         }
-        FNR==1 { check(); in_entry=0; skip=0; name=""; matched=0 }
+        FNR==1 { finalize_file(); in_entry=0; skip=0; name=""; matched=0; strict_matched=0 }
         /^\[Desktop Entry\]/ { in_entry=1; next }
         /^\[/ { in_entry=0 }
         in_entry && /^NoDisplay=true/ { skip=1 }
@@ -82,19 +89,27 @@ _desktop_lookup_by_exec() {
                 }
             }
             if (cmd == target) matched=1
+
+            full_exec = ""
+            for (ti=1; ti<=n; ti++) full_exec = full_exec toks[ti] US
+            if (full_exec == full_target) strict_matched=1
         }
-        END { check() }
+        END {
+            finalize_file()
+            if (strict_name != "") { print strict_name }
+            else if (loose_name != "") { print loose_name }
+        }
     ' "${_files[@]}" 2>/dev/null
 }
 
 # Turn a .desktop Name= value ("Brave Web Browser") into the same slug
 # format the path-based fallback below produces ("brave-web-browser").
 _format_desktop_name() {
-    printf '%s' "$1"					\
-        | tr -s '[:space:]' '-'			\
-        | tr -cd '[:alnum:]-'			\
-        | tr -s '-'						\
-        | sed -e 's/^-//' -e 's/-$//'	\
+    printf '%s' "$1"                \
+        | tr -s '[:space:]' '-'     \
+        | tr -cd '[:alnum:]-'       \
+        | tr -s '-'                 \
+        | sed -e 's/^-//' -e 's/-$//' \
         | tr '[:upper:]' '[:lower:]'
 }
 
@@ -102,7 +117,7 @@ _format_desktop_name() {
 # Flatpaks always launch as "flatpak run ...", so we only need to check the first word
 if [ "$1" = "flatpak" ]; then
     exec "$@"
-# Is it an appimage? Uncomment the two lines below in case you ever see issues (unlikely)
+# Is it an appimage? Uncomment below (and the check above it) in case you ever see issues (unlikely)
 # elif printf '%s\n' "$@" | grep -qi appimage; then
 #     exec "$@"
 else
@@ -116,11 +131,6 @@ else
     # app-desktop.slice - creates the desktop slice under the app slice which is under the user slice
     slice="desktop.slice"
 
-    # Try to guess a sensible ApplicationID, expected end format is:
-    #
-    # firstword-word-word-...-finalword - regular binaries
-    # firstword - appimages
-    #
     # Cache key is the exact invocation, so repeats skip straight past
     # everything below (filtering, desktop lookup, formatting)
     _key=$(printf '%s\x1f' "$@")
@@ -153,6 +163,11 @@ else
         # etc. Its first surviving line is also what we match against installed
         # .desktop files' Exec= (see use_desktop_names above), since that's always
         # the actual binary name regardless of how many extra args got passed.
+        #
+        # If the args however need to parse, then try to guess a sensible ApplicationID, expected end format is:
+        #
+        # firstword-word-word-...-finalword - regular binaries
+        # firstword - appimages
         _filtered=$(printf '%s\n' "${_naming_args[@]}"                          \
             | sed -e 's/^env\s*//'                                              \
                   -e '/^[A-Z_][A-Z0-9_]*=/d'                                    \
@@ -167,15 +182,17 @@ else
                   -e '/^$/d')
 
         _target=$(printf '%s\n' "$_filtered" | head -n1)
+        mapfile -t _ftoks <<< "$_filtered"
+        _full_target=$(printf '%s\x1f' "${_ftoks[@]}")
         _desktop_name=""
-        [ "$use_desktop_names" = "1" ] && _desktop_name=$(_desktop_lookup_by_exec "$_target")
+        [ "$use_desktop_names" = "1" ] && _desktop_name=$(_desktop_lookup_by_exec "$_target" "$_full_target")
 
         if [ -n "$_desktop_name" ]; then
             appid=$(_format_desktop_name "$_desktop_name")
         else
-            appid=$(printf '%s\n' "$_filtered"	\
-                | sed '$!s/\([^-\]\)$/\1-/'		\
-                | tr -cd '[:alnum:]-'			\
+            appid=$(printf '%s\n' "$_filtered"          \
+                | sed '$!s/\([^-\]\)$/\1-/'              \
+                | tr -cd '[:alnum:]-'                    \
                 | tr '[:upper:]' '[:lower:]')
         fi
 
