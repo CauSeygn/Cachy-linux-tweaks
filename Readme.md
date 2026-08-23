@@ -1,5 +1,4 @@
-# <u>**NOTE: IF YOU'RE ON GITHUB, THIS IS A MIRROR**</u>
-If you wish to contribute, head over to https://git.gay/CauSeygn/Cachy-linux-tweaks and read the [md](Contributing.md).
+If you wish to contribute, read the [md](Contributing.md).
 
 # CachyOS/Linux Tweaks
 

@@ -1,11 +1,9 @@
 # To grab these go open a terminal and type:
 
 ```sh
-paru -S qemu-full
+# You only need swtpm if your motherboard lacks a compatible module and you want to run W11
+yay -S qemu-full virt-manager swtpm
 ```
-
-# To grab virt-manager
-You can go to `cachy-hello -> install apps (tick advanced) -> virtual computing -> virt-manager` (alternatively use paru and just append `virt-manager`).
 
 # After that is done, you can run:
 

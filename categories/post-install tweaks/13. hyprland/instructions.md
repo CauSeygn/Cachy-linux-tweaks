@@ -27,12 +27,12 @@ This is an opinionated install, but clean of garbage configs that you'd have to 
 ## Install Hyprland
 First, update your system with:
 ```sh
-paru
+yay
 ```
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-paru -S hyprland quickshell dms-shell-git cava wl-clipboard kitty qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie hyprshot clipse dconf-editor
+yay -S hyprland quickshell dms-shell-git cava wl-clipboard kitty qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie hyprshot clipse dconf-editor
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies).
 

@@ -66,7 +66,7 @@ Aside from a few corrupt ones (I don't recall which, sorry, just use the list) y
 #### You can also install these to your system so you can use them outside of wine. Wherever your wine prefix is at (default is ~/.wine) navigate to `.../drive_c/windows/Fonts/` and copy everything from here to `~/.fonts/` but before that, open the terminal and do:
 
 ```sh
-paru -S ttf-ms-fonts
+yay -S ttf-ms-fonts
 ```
 
 Now your system has all those fonts as well (hunt down duplicates in `kde settings -> text & fonts -> font management -> find duplicates`).

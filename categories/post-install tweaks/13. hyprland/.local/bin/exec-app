@@ -24,10 +24,16 @@ use_desktop_names=1
 # (handles apps getting updated/renamed without needing a manual cache clear)
 cache_ttl_days=7
 
+# How many days a cache entry survives without being launched again before it's dropped
+# (checked per this many days)
+cache_stale_days=30
+
 # Where resolved names get cached, keyed per exact invocation
 _cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/exec-app"
 _cache_file="$_cache_dir/cache.txt"
 _cache_ttl=$(( cache_ttl_days * 86400 ))
+_clear_marker="$_cache_dir/last_clear.txt"
+_cache_stale=$(( cache_stale_days * 86400 ))
 
 # Where .desktop files live, per the XDG base-dir spec
 _desktop_dirs() {
@@ -135,6 +141,24 @@ else
     # everything below (filtering, desktop lookup, formatting)
     _key=$(printf '%s\x1f' "$@")
     _now=$EPOCHSECONDS
+
+    # Throttled stale-entry sweep: costs one [-f] test + one plain `read`
+    # (no fork) on every launch. The actual awk/flock/mv rewrite only runs
+    # once the marker shows cache_stale_days have passed since the last sweep.
+    _last_clear=0
+    [ -f "$_clear_marker" ] && read -r _last_clear < "$_clear_marker" 2>/dev/null
+    if (( _now - _last_clear >= _cache_stale )); then
+        if [ -f "$_cache_file" ]; then
+            (
+                flock -w 2 9 || exit 0
+                awk -F'\t' -v now="$_now" -v stale="$_cache_stale" \
+                    '(now - $3) < stale' "$_cache_file" 2>/dev/null > "$_cache_file.tmp"
+                mv "$_cache_file.tmp" "$_cache_file"
+            ) 9>"$_cache_file.lock"
+        fi
+        mkdir -p "$_cache_dir"
+        printf '%s\n' "$_now" > "$_clear_marker"
+    fi
     appid=""
 
     # Pure-bash cache read: no forking date/awk just to check a cache hit

@@ -3,7 +3,7 @@ Some things are unfortunately misconfigured or absent in Cachy (though rare) or 
 Such are the wrong phonon backend on older installs, or the lack of codecs. This shouldn't be the case on newer installs, but in case it is, open the terminal and run:
 
 ```sh
-paru -S vlc-plugins-all phonon-qt6-vlc
+yay -S vlc-plugins-all phonon-qt6-vlc
 ```
 
 Then run:
@@ -17,17 +17,17 @@ And configure it to use the vlc backend, on some apps (such as kalarm) you need 
 ### Jack:
 Open the terminal and run:
 ```sh
-paru -Qs jack
+yay -Qs jack
 ```
 if you get an output of `pipewire-jack` - great, move on from here - if you do not get an output of `pipewire-jack`, run:
 ```sh
-paru -S pipewire-jack
+yay -S pipewire-jack
 ```
 When prompted, replace `jack2` or whatever by typing `y` then pressing enter; pipewire-jack supersedes it.
 
 ## Other (that I consider) missing stuff:
 ```sh
-paru -S kdenetwork-filesharing fuse2 kio-admin khelpcenter sshfs icoutils
+yay -S kdenetwork-filesharing fuse2 kio-admin khelpcenter sshfs icoutils
 ```
 
 ### Explanations:
@@ -104,7 +104,7 @@ and let through ip addresses that look familiar.
 ## Replace SDDM with PLM
 As of january 2026, SDDM was replaced with Plasma Login Manager, new installs picking KDE won't ever see SDDM on it but existing users won't get automatically migrated. To migrate, first update your system:
 ```sh
-paru
+yay
 ```
 then run:
 ```sh

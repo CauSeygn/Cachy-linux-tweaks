@@ -38,6 +38,7 @@ Whatever you clone, simply clone via SSH, that's it.
     - Open the folder containing the repo you just cloned
     - Source Control → ... (where you see `main`) → Branch → Create Branch... → name it however you like → make your edits
     - Put them in `categories/3rd-party/#number. WHATEVERYOUDECIDETONAMEIT`
+		- You can add an `author.txt` to the same folder/name the folder after your username; you reserve the right to request a purging of your own 3rd-party commits, if for whatever reason you wish to do so at any time, simply open an issue requesting this
     - Once done, Source Control → Commit and Push
     - Open your PR via git.gay
     - Once merged you can delete the branch on git.gay and locally, in VSCode by navigating to Source Control → click where you used to see `main` and switch back to it → Branch → Delete Branch...

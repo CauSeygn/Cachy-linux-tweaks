@@ -30,7 +30,7 @@ qemu-system-x86_64                                                              
     -device virtio-sound-pci,audiodev=my_audiodev -audiodev pipewire,id=my_audiodev            \
     -device virtio-vga-gl,hostmem=4G,blob=true,venus=true                                      \
     -vga none                                                                                  \
-    -display gtk,gl=on,show-cursor=on                                                          \
+    -display sdl,gl=on                                                                         \
     -usb -device usb-tablet                                                                    \
     -object memory-backend-memfd,id=mem1,size=12G                                              \
     -machine memory-backend=mem1                                                               \
@@ -43,7 +43,7 @@ qemu-system-x86_64                                                              
 
 - `-smp 6` means 6 cpu cores
 - `-m 12G` means 12GB of RAM
-- `-net user,hostfwd=tcp::2222-:22` means that port 22 is being forwarded from the host to the vm as port 2222, thus if you wanted an ssh connection the vm from some device, you'd do:
+- `-net user,hostfwd=tcp::2222-:22` means that port 22 is being forwarded from the host to the vm as port 2222, thus if you wanted an ssh connection the vm from the same device, you'd do:
 
 ```sh
 ssh -p 2222 vmusername@vmlocalhost

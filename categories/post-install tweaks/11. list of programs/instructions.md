@@ -3,7 +3,7 @@ This is my list of programs, which I use on Linux
 ###### (general windows gaming is not mentioned, naturally I use what is outlined in [8. windows support](../8.%20windows%20support/instructions.md)):
 
 - Browser: brave
-- Music player: aimp (wine), audacious, strawberry
+- Music player: aimp, audacious, strawberry
 - Video player: haruna
 - Image viewer: gwenview
 - File manager: dolphin, yazi
@@ -12,8 +12,8 @@ This is my list of programs, which I use on Linux
 - Image editing: aseprite, gimp, inkscape, krita, pixi-editor
 - Screenshotting: spectacle (kde), hyprshot (hyprland)
 - 3d modeling: blender
-- Video recording: obs, gpu-screen-recorder
-- Archive manager: 7-zip (wine, native Linux ones have issues dealing with jis)
+- Video recording: obs, gpu-screen-recorder-ui
+- Archive manager: 7-zip (wine, native Linux ones have issues dealing with jis), Ark
 - Terminal: konsole, kitty
 - Text editor: kate, micro, vscode (not vscodium), nano
 - Office suite: onlyoffice

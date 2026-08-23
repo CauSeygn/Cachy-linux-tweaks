@@ -2,7 +2,7 @@
 this bit is for the scheduler, the governor and boost have their own .md's inside of the /etc folder, go do both, either or none of those first, then come back here
 
 # CPU Scheduler
-Not to be confused with the governor `powersave, ondemand, performance, schedutil, and friends` — the scheduler is a separate component that prioritizes certain tasks over others. There are many other schedulers to try other than the default CachyOS ships, in userspace, via `sched_ext`. CachyOS comes with them pre-installed and a nice gui utility where you can set them permanently, but before that - open a terminal and run ([See section 15. yay first or substitute with paru](../15.%20yay/instructions.md)):
+Not to be confused with the governor `powersave, ondemand, performance, schedutil, and friends` — the scheduler is a separate component that prioritizes certain tasks over others. There are many other schedulers to try other than the default CachyOS ships, in userspace, via `sched_ext`. CachyOS comes with them pre-installed and a nice gui utility where you can set them permanently, but before that - open a terminal and run:
 ```sh
 yay -S stress-ng
 ```
@@ -19,7 +19,7 @@ Open a terminal and run (**<u>READ THE COMMENT INSIDE FIRST!!!</u>**):
 # with the command below
 stress-ng --cpu $(nproc) --cpu-method matrixprod
 ```
-to pin all your cores/threads to 100%, and do things you would usually do, such as browsing the internet, opening a file manager, a video player, listening to music, and so on. Once you see how horrible it all is, go back to the terminal and cancel the stress test (`ctrl+c` in the terminal).
+to pin all your cores/threads to 100%, and do things you would usually do, such as browsing the internet, opening a file manager, a video player, listening to music, and so on. Once you see how horrible it all is, go back to the terminal and cancel the stress test (`ctrl + c` in the terminal).
 
 Next, to set the current scheduler to scx_lavd gaming mode run:
 ```sh

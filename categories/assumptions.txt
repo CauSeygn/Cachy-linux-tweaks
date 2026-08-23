@@ -4,3 +4,4 @@
 3. you picked kde during install
 4. you picked fish shell during install
 5. you actually installed it
+6. you picked yay and followed post-install tweak "0. yay"

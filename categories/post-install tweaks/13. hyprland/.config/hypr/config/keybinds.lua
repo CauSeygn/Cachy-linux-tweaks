@@ -87,3 +87,15 @@ hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true }) -
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true }) -- Pause
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true }) -- Play
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true }) -- Previous
+
+-- 10. Zoom
+local function zoomfunction(value)
+    local zoomvalue = hl.get_config("cursor:zoom_factor")
+    local newzoom = math.max(1.0, math.min(3.0, zoomvalue + value))
+    hl.config({ cursor = { zoom_factor = newzoom } })
+end
+hl.bind(mainMod .. " + Minus", function() zoomfunction(-0.1) end, { repeating = true}) -- Zoom Out
+hl.bind(mainMod .. " + Plus", function() zoomfunction(0.1) end, { repeating = true }) -- Zoom In
+hl.bind("code:82", function() zoomfunction(-0.1) end, { repeating = true }) -- Zoom Out, Numpad -
+hl.bind("code:86", function() zoomfunction(0.1) end, { repeating = true }) -- Zoom In, Numpad +
+hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("hyprctl eval 'hl.config({ cursor = { zoom_factor = 1.0 } })'")) -- Reset Zoom

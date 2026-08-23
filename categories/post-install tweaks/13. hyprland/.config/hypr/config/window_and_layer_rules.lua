@@ -99,9 +99,9 @@ hl.window_rule({
 
 -- Fluxer
 hl.window_rule({
-    name = "fluxer-browser-streaming",
+    name = "browser-streaming",
     match = {
-        initial_title = "web.fluxer.app is sharing a window.",
+        initial_title = "^(.*)(is sharing)(.*)$",
     },
     workspace = "special:void silent",
 })
@@ -114,6 +114,7 @@ hl.window_rule({
     },
     float = true,
     size = {828, 828},
+	opacity = "1 override",
 })
 
 -- FL Studio
@@ -216,6 +217,14 @@ hl.window_rule({
         initial_class = "krita",
     },
     opacity = "1 override",
+})
+
+hl.window_rule({
+    name = "godot",
+    match = {
+		initial_title = "^(.*)Godot(.*)$",
+	},
+	opacity = "1 override",
 })
 
 -- Dialog windows
