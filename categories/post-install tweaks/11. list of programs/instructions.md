@@ -15,7 +15,7 @@ This is my list of programs, which I use on Linux
 - Video recording: obs, gpu-screen-recorder-ui
 - Archive manager: 7-zip (wine, native Linux ones have issues dealing with jis), Ark
 - Terminal: konsole, kitty
-- Text editor: kate, micro, vscode (not vscodium), nano
+- Text editor: kate, micro, zed, nano
 - Office suite: onlyoffice
 - Alarm: kalarm (kde), alarm clock (dms plugin, hyprland)
 - Virtual machines: qemu, virt-manager (check [ufw](../12.%20missing%20things%20and%20tweaks/instructions.md#ufw) or disable it)
