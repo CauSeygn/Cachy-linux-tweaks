@@ -1,40 +1,41 @@
 # Preface
-This is my list of programs, which I use on Linux
+This is my list of programs, which I use on Linux, sorted by my subjective view of `best → worst`, aside from `[n]` labeled categories (for obvious reasons)
 ###### (general windows gaming is not mentioned, naturally I use what is outlined in [8. windows support](../8.%20windows%20support/instructions.md)):
 
 - Browser: brave
-- Music player: aimp, audacious, strawberry
+- Music player: strawberry, aimp, audacious
 - Video player: haruna
-- Image viewer: gwenview
+- Image viewer: koko, gwenview
 - File manager: dolphin, yazi
-- YouTube client: freetube
+- YouTube client: freetube (I no longer use it as of several months ago, I try to not even use YouTube anymore; interpret this as you will)
 - Calculator: qalculate (qt)
-- Image editing: aseprite, gimp, inkscape, krita, pixi-editor
-- Screenshotting: spectacle (kde), hyprshot (hyprland)
+- Image annotating: koko, spectacle (kde), gwenview
+- Image editing[n]: aseprite, gimp, inkscape, krita, pixi-editor
+- Screenshotting: hyprshot (hyprland), spectacle (kde)
 - 3d modeling: blender
-- Video recording: obs, gpu-screen-recorder-ui
+- Video recording: gpu-screen-recorder-ui, obs
 - Archive manager: 7-zip (wine, native Linux ones have issues dealing with jis), Ark
-- Terminal: konsole, kitty
-- Text editor: kate, micro, zed, nano
+- Terminal: kitty, konsole
+- Text editor: zed, kate, micro, nano
 - Office suite: onlyoffice
-- Alarm: kalarm (kde), alarm clock (dms plugin, hyprland)
+- Alarm: alarm clock (dms plugin, hyprland), kalarm (kde)
 - Virtual machines: qemu, virt-manager (check [ufw](../12.%20missing%20things%20and%20tweaks/instructions.md#ufw) or disable it)
 - Android emulator: genymotion (check [ufw](../12.%20missing%20things%20and%20tweaks/instructions.md#ufw) or disable it)
-- Emulators: pcsx2, rpcs3, ppsspp
+- Emulators[n]: pcsx2, rpcs3, ppsspp
 - GPU fan curve control: lact
-- Weather widget: weather widget plus (kde), in-built dms weather display (hyprland)
-- Phone<->PC connectivity: kde connect (check [ufw](../12.%20missing%20things%20and%20tweaks/instructions.md#ufw) or disable it), samba, material files (android), wormhole-rs
-- PC<->PC connectivity:samba, wormhole-rs
+- Weather widget: in-built dms weather display (hyprland), weather widget plus (kde)
+- Phone<->PC connectivity[n]: kde connect (check [ufw](../12.%20missing%20things%20and%20tweaks/instructions.md#ufw) or disable it), samba, material files (android), wormhole-rs
+- PC<->PC connectivity[n]:samba, wormhole-rs
 - File searching and indexing: fsearch
-- System monitoring: btop, mission control, cpu-x, nvtop, nvitop (nvidia)
+- System monitoring[n]: btop, mission control, cpu-x, nvtop, nvitop (nvidia)
 - Diff program: meld
 - Project diff generator: kompare
 - Remote access: rustdesk (check [ufw](../12.%20missing%20things%20and%20tweaks/instructions.md#ufw) or disable it)
 - Messaging, calls: signal desktop
-- Audio routing: qpwgraph, coppwr
+- Audio routing[n]: qpwgraph, coppwr
 - Image upscaling: upscayl
 - FFmpeg frontend: videomass
-- Discord client that doesn't suck on linux (and in general): vesktop
+- ~~Discord~~ chat client that doesn't suck on linux (and in general): ~~vesktop~~ fluxer
 - ISO image manipulation: brasero
 - PDF reader: okular
 - Song recognition: songrec

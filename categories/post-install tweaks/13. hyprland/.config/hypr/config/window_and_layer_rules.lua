@@ -97,6 +97,17 @@ hl.window_rule({
     size = {"(monitor_w*0.39)", "(monitor_h*0.9)"},
 })
 
+-- Emoji Selector
+hl.window_rule({
+    name = "emojier",
+    match = {
+        initial_class = "^(org.kde.plasma.emojier)$",
+    },
+    center = true,
+    float = true,
+    size = {"(monitor_w*0.6)", "(monitor_h*0.7)"},
+})
+
 -- Fluxer
 hl.window_rule({
     name = "browser-streaming",
@@ -104,17 +115,6 @@ hl.window_rule({
         initial_title = "^(.*)(is sharing)(.*)$",
     },
     workspace = "special:void silent",
-})
-
--- Flash
-hl.window_rule({
-    name = "adobe-flash",
-    match = {
-        initial_title = "Adobe Flash Player.*",
-    },
-    float = true,
-    size = {828, 828},
-	opacity = "1 override",
 })
 
 -- FL Studio
@@ -128,47 +128,6 @@ hl.window_rule({
     float = true,
 })
 
--- Gwenview
-hl.window_rule({
-    name = "gwenview-hyprshot",
-    match = {
-        initial_class = "^(org.kde.gwenview)$",
-    },
-    float = true,
-    move = {"(monitor_w*0.245)", "(monitor_h*0.01)"},
-    size = {"(monitor_w*0.75)", "(monitor_h*0.75)"},
-})
-
-hl.window_rule({
-    name = "gwenview-annotate",
-    match = {
-        initial_title = "(Annotate)(.*)(Gwenview)",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.85)", "(monitor_h*0.8)"},
-})
-
-hl.window_rule({
-    name = "gwenview-share",
-    match = {
-        initial_title = "Send File — Gwenview",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.25)", "(monitor_h*0.4)"},
-})
-
--- HCI
-hl.window_rule({
-    name = "hammercrest-idle",
-    match = {
-        initial_title = "Hammer Crest Idle",
-    },
-    render_unfocused = true,
-    float = true,
-})
-
 -- KeepassXC
 hl.window_rule({
     name = "keepassxc",
@@ -176,6 +135,27 @@ hl.window_rule({
         initial_class = "org.keepassxc.KeePassXC",
     },
     no_screen_share = true,
+})
+
+-- Koko
+hl.window_rule({
+    name = "koko-hyprshot",
+    match = {
+        initial_title = "^(.*)(hyprshot.png — Photos)$",
+    },
+    float = true,
+    move = {"(monitor_w*0.245)", "(monitor_h*0.01)"},
+    size = {"(monitor_w*0.75)", "(monitor_h*0.75)"},
+})
+
+hl.window_rule({
+    name = "koko-share",
+    match = {
+        initial_title = "^(Photos)$",
+    },
+    center = true,
+    float = true,
+    size = {"(monitor_w*0.2)", "(monitor_h*0.4)"},
 })
 
 -- ProtonVPN

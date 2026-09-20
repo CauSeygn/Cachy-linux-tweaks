@@ -112,6 +112,16 @@ sudo pacman -S plasma-login-manager && sudo systemctl disable sddm && sudo syste
 ```
 Finally, configure it in KDE System Settings -> Login Screen (under Security & Privacy). You can now reboot/shutdown/whatever, next boot you'll see PLM (or not, if you autologin). Note that PLM is usable under DE/WM's other than KDE, I use it in Hyprland.
 
+## (Replace Gwenview with) Koko
+As of august 2026, `Koko` has been proposed as an eventual successor to Gwenview, but is not yet so as of writing (21st September). Personally, I already find koko to have feature parity for my usecase, it is as simple as:
+```sh
+yay -S koko
+```
+followed by, optionally (if for your usecase it is also at feature parity) setting it as the default photo viewer in kde settings and removing gwenview with:
+```sh
+yay -Rns gwenview
+```
+
 ## Snapshot Management
 As with Limine we get bootable snapshots by default in CachyOS, let's fix up the atrocious defaults a bit.
 
@@ -130,6 +140,20 @@ change these to **(note that the `5` in my case should in your case encompass th
 MAX_SNAPSHOT_ENTRIES=5
 EXCLUDE_SNAPSHOT_TYPES="pre, post"
 ```
-and save the file. What this will do is exclude those (often, __especially__ with AUR) useless bootable snapshots that pacman creates AND limit the qualified ones' amount to encompass just what we want [- 1 (in case of rapid updating)], once and clear away the trash.
+and save the file. What this will do is exclude those (often, __especially__ with AUR) useless bootable snapshots that pacman creates AND limit the qualified ones' amount to encompass just what we want [- 1 (in case of rapid updating)], and clear away the trash.
 
 To see it in action, type into the terminal `sudo limine-snapper-list` and the same ones you see there, are the same ones you'll see in Limine, during boot time.
+
+### Optional
+To fully get rid of those crappy `pre, post` snapshots, which are beyond useless for any arch user that uses the AUR (every arch user, unless they're lying), open the terminal in whichever directory your user has write permissions (such as ~/Downloads/, ~/, ...) and run, in order, in the same directory:
+```sh
+# Preserve the snapshotting default:
+cp /etc/snapper/config-templates/cachyos-root .
+# Remove the pre, post snapshot creator,
+# "--noscriptlet" is very important, if you miss this
+# you will have to recreate snapshotting and resync it
+# back with limine, guess how I know:
+yay -Rns --noscriptlet cachyos-snapper-support
+# Move the template back:
+sudo cp cachyos-root /etc/snapper/config-templates
+```

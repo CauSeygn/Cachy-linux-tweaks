@@ -11,7 +11,7 @@ local clipboard = prefix .. "kitty --class clipse -e clipse"
 local emoji = prefix .. "plasma-emojier"
 local pickColor = prefix .. "hyprpicker --autocopy"
 local screenshotUtil = "hyprctl eval 'hl.config({ cursor = { use_cpu_buffer = true } })' && hyprshot -m region -s -z --clipboard-only && hyprctl eval 'hl.config({ cursor = { use_cpu_buffer = false } })'"
-local screenshotUtilEdit = "hyprctl eval 'hl.config({ cursor = { use_cpu_buffer = true } })' && hyprshot -m region -s -z -o '/tmp' -- gwenview && hyprctl eval 'hl.config({ cursor = { use_cpu_buffer = false } })'"
+local screenshotUtilEdit = "hyprctl eval 'hl.config({ cursor = { use_cpu_buffer = true } })' && hyprshot -m region -s -z -o '/tmp' -- koko && hyprctl eval 'hl.config({ cursor = { use_cpu_buffer = false } })'"
 local keybindMenu = "dms ipc call keybinds toggle hyprland"
 
 ---------------------

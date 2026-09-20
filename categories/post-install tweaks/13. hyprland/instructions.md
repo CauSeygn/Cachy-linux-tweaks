@@ -32,7 +32,7 @@ yay
 And restart if necessary.
 ### Open a terminal and type:
 ```sh
-yay -S hyprland quickshell dms-shell-git cava wl-clipboard kitty qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie hyprshot clipse dconf-editor
+yay -S --needed hyprland quickshell dms-shell-git cava wl-clipboard kitty koko qt6ct-kde xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprpolkitagent hyprpicker yazi grim slurp udiskie hyprshot clipse dconf-editor
 ```
 This will install all the packages that I use (you can add your own later, or remove ones you don't want, but keep in mind `dms`'s dependencies).
 
