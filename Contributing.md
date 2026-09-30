@@ -52,7 +52,7 @@ Whatever you clone, simply clone via SSH, that's it.
     - Once merged you can delete the branch on codeberg.org and locally, in Zed by switching back to `main` branch, then mousing over the one you wish to delete and clicking the trash can icon
 
 # Standards
-- Don't duplicate info, for example if you want to make sure the user has set up wine, point to it in the md via a hyperlink `[whatever you want to put here as the name](../../post-install tweaks/8. windows support/instructions.md)`
+- Don't duplicate info, for example if you want to make sure the user has set up wine, point to it in the md via a hyperlink `[whatever you want to put here as the name](../../post-install tweaks/8. windows support/instructions.md)` (note that spaces must actually be replaced with `%20`, this is just a visual example)
 - Add info that is missing, you can also provide examples and explanations if you want (but don't go writing essays unless absolutely needed), structure them under the correct path where they're expected
 - If you want to add images, go ahead, just make an `assets` folder that lives either where your tweak does (in the same folder under assets), or on the main repo view, where the `categories` folder lives;
 - Don't feel like you need to pretend you're the same person as me in your writing style, nor like you can't express individuality, but strive for coherence, don't be archwiki—wide as an ocean, deep as a puddle
