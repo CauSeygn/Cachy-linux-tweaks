@@ -38,7 +38,7 @@ Whatever you clone, simply clone via SSH, that's it.
     - Open the folder containing the repo you just cloned
     - Source Control → ... (where you see `main`) → Branch → Create Branch... → name it however you like → Publish your branch → make your edits
     - Put them in `categories/3rd-party/#number. WHATEVERYOUDECIDETONAMEIT`
-		- You can add an `author.txt` to the same folder/name the folder after your username; you reserve the right to request a purging of your own 3rd-party commits, if for whatever reason you wish to do so at any time, simply open an issue requesting this
+        - You can add an `author.txt` to the same folder/name the folder after your username; you reserve the right to request a purging of your own 3rd-party commits, if for whatever reason you wish to do so at any time, simply open an issue requesting this
     - Once done, Source Control → Commit and Push
     - Open your PR via codeberg.org
     - Once merged you can delete the branch on codeberg.org and locally, in VSCode by navigating to Source Control → click where you used to see `main` and switch back to it → Branch → Delete Branch...
@@ -46,8 +46,8 @@ Whatever you clone, simply clone via SSH, that's it.
     - Open the folder containing the repo you just cloned
     - Up above (where you see `main`, mouse over the leftmost that says `Branch & Stash`) → create your branch by naming it however you like then pressing enter → Publish your branch → make your edits
     - Put them in `categories/3rd-party/#number. WHATEVERYOUDECIDETONAMEIT`
-		- You can add an `author.txt` to the same folder/name the folder after your username; you reserve the right to request a purging of your own 3rd-party commits, if for whatever reason you wish to do so at any time, simply open an issue requesting this
-		- Once done, Git Panel (`Ctrl + Shift + G`) → Stage All → write your commit message in the field → Commit → Push
+        - You can add an `author.txt` to the same folder/name the folder after your username; you reserve the right to request a purging of your own 3rd-party commits, if for whatever reason you wish to do so at any time, simply open an issue requesting this
+    - Once done, Git Panel (`Ctrl + Shift + G`) → Stage All → write your commit message in the field → Commit → Push
     - Open your PR via codeberg.org
     - Once merged you can delete the branch on codeberg.org and locally, in Zed by switching back to `main` branch, then mousing over the one you wish to delete and clicking the trash can icon
 
