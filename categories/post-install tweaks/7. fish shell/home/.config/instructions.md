@@ -38,7 +38,7 @@ Right+Shift-Ctrl-Alt-AppScreen
 then save the bind list, now `Shift+Left` and `Shift+Right` will work once you re-enter Konsole.
 
 ## Rootful interactive fish
-Bash is a downright horrible shell to find yourself in for the few times you may want to mess around as the root user, you can call `fish` afterwards if you like, but there's a simpler (and safe) way to autoinvoke fish whenever you run `su` or `sudo -s` (and under no circumstances in a non-interactive instance! (important to not break anything that expects bash or sh to run it ONLY!, but doesn't clarify)) to become root, open a terminal and type (see [micro](../../../6.%20micro%20text%20editor%20look%20and%20feel/instructions.md) for auto-root as-needed privileges):
+Bash is a downright horrible shell to find yourself in for the few times you may want to mess around as the root user, you can call `fish` afterwards if you like, but there's a simpler (and safe) way to autoinvoke fish whenever you run `su` or `sudo -s` (and under no circumstances in a non-interactive instance! (important to not break anything that expects bash or sh to run it ONLY!, but doesn't clarify)) to become root, open a terminal and type (see [micro](../../../6.%20micro%20text%20editor%20look%20and%20feel/home/.config/instructions.md) for auto-root as-needed privileges):
 ```sh
 micro /root/.bashrc
 ```
