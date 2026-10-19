@@ -31,7 +31,7 @@ makepkg -si
 ```
 now that `yay` is installed, run:
 ```sh
-yay --gendb
+yay -Y --gendb
 ```
 so it learns what is on your system, finally, run:
 ```sh
