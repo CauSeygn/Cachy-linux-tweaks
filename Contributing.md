@@ -28,7 +28,7 @@ ssh -T git@codeberg.org
 ```
 and you'll see an output letting you know you're connected. To verify it, press verify and do what it tells you.
 
-## Link Account to VSCode
+## Link Account to your favorite IDE
 Whatever you clone, simply clone via SSH, that's it.
 
 ## Creating Pull Requests
