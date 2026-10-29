@@ -54,8 +54,16 @@ hl.config({
 
         blur = {
             enabled   = true,
-            size      = 8,
             passes    = 1,
+            size      = 8,
+            variant  = "acrylic",
+            acrylic  = {
+                aberration = 0.001,
+                bulb = 255,
+                clarity = 0.71,
+                refraction = 48,
+                tint = 0xee0069ed,
+            },
             vibrancy  = 0.1696,
         },
 
