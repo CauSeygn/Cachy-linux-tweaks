@@ -39,7 +39,7 @@ hl.config({
 	    -- 4) python accel.py
 	    -- The first number is step size, then just paste the rest, alternatively set to adaptive if you want to use your in-built mouse acceleration profile or flat if you do not want any mouse acceleration.
         -- The profile below is for a 27" 1440p monitor, using an 800dpi mouse, with a monitor scaling of 1, at 20 sample points and a sensitivity factor of 3:
-        accel_profile = "custom 0.1715582005 0.000 0.175 0.349 0.611 0.874 1.136 1.422 1.821 2.220 2.619 3.017 3.416 3.815 4.214 4.613 5.012 5.410 5.809 6.208 7.032",
+        accel_profile = "custom", "0.1715582005", "0.000 0.175 0.349 0.611 0.874 1.136 1.422 1.821 2.220 2.619 3.017 3.416 3.815 4.214 4.613 5.012 5.410 5.809 6.208 7.032",
 
         focus_on_close = 1,
 
