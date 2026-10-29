@@ -58,6 +58,17 @@ hl.config({
             passes    = 1,
             vibrancy  = 0.1696,
         },
+
+        wobble = {
+            enabled = true,
+            mesh = 18,
+            stiffness = 500,
+            damping = 8,
+            mass = 3.75,
+            intensity = 1,
+            value_epsilon = 10,
+            velocity_epsilon = 40,
+        },
     },
 
     animations = {
