@@ -55,28 +55,6 @@ hl.window_rule({
 
 -- AIMP
 hl.window_rule({
-    name = "aimp-main-app",
-    match = {
-        initial_class = "aimp.exe",
-        initial_title = "^$",
-    },
-    no_initial_focus = true,
-})
-
-hl.window_rule({
-    name = "aimp-menus",
-    match = {
-        initial_class = "aimp.exe",
-        initial_title = "^$",
-        focus = false,
-    },
-    opacity = "0 override",
-    no_anim = true,
-    no_blur = true,
-    border_size = 0,
-})
-
-hl.window_rule({
     name = "aimp-position",
     match = {
         initial_title = "AIMP",
@@ -176,31 +154,15 @@ hl.window_rule({
 
 -- Art Programs
 hl.window_rule({
-    name = "aseprite",
+    name = "art-apps-by-class",
     match = {
-        initial_class = "Aseprite",
+        initial_class = "^(Aseprite|gimp|krita)$",
     },
     opacity = "1 override",
 })
 
 hl.window_rule({
-    name = "gimp",
-    match = {
-        initial_class = "gimp",
-    },
-    opacity = "1 override",
-})
-
-hl.window_rule({
-    name = "krita",
-    match = {
-        initial_class = "krita",
-    },
-    opacity = "1 override",
-})
-
-hl.window_rule({
-    name = "godot",
+    name = "art-apps-by-title",
     match = {
 		initial_title = "^(.*)Godot(.*)$",
 	},
@@ -209,9 +171,9 @@ hl.window_rule({
 
 -- Dialog windows
 hl.window_rule({
-    name = "dialog-windows-1",
+    name = "large-dialogs",
     match = {
-        title = "^(Open File)(.*)$",
+        title = "^(Open File|Volume Control|Select a File|Choose wallpaper|Open Folder|Save screenshot|Save As|Library|File Upload|Choose Application|Select file|Select folder)(.*)$|^(.*)(wants to save|wants to open)$|^(Select)(.*)(F)(.*)$",
     },
     center = true,
     float = true,
@@ -219,149 +181,9 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name = "dialog-windows-2",
+    name = "small-dialogs",
     match = {
-        title = "^(Volume Control)(.*)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-3",
-    match = {
-        title = "^(Select a File)(.*)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-4",
-    match = {
-        title = "^(Choose wallpaper)(.*)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-5",
-    match = {
-        title = "^(Open Folder)(.*)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-6",
-    match = {
-        title = "^(Save screenshot)(.*)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-7",
-    match = {
-        title = "^(Save As)(.*)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-8",
-    match = {
-        title = "^(Library)(.*)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-9",
-    match = {
-        title = "^(File Upload)(.*)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-10",
-    match = {
-        title = "^(.*)(wants to save)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-11",
-    match = {
-        title = "^(.*)(wants to open)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-12",
-    match = {
-        title = "^(Choose Application)(.*)$",
-    },
-    center = true,
-    float = true,
-    size = {782, 677},
-})
-
-hl.window_rule({
-    name = "dialog-windows-13",
-    match = {
-        title = "^(Select file)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-14",
-    match = {
-        title = "^(Select folder)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-15",
-    match = {
-        title = "^(Select)(.*)(F)(.*)$",
-    },
-    center = true,
-    float = true,
-    size = {"(monitor_w*0.7)", "(monitor_h*0.9)"},
-})
-
-hl.window_rule({
-    name = "dialog-windows-16",
-    match = {
-        initial_class = "hyprland-share-picker",
+        initial_class = "^(hyprland-share-picker)$",
     },
     center = true,
     float = true,
