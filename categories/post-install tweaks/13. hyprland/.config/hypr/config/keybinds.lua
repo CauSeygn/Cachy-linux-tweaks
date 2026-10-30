@@ -51,6 +51,20 @@ hl.bind(mainMod .. " + A", hl.dsp.layout("consume_or_expel prev")) -- Move Windo
 hl.bind(mainMod .. " + S", hl.dsp.window.swap({ direction = "down" })) -- Move Window in Column Down
 hl.bind(mainMod .. " + D", hl.dsp.layout("consume_or_expel next")) -- Move Window (to Column) Right
 
+local function toggleWobble() -- Reverse current state & notify
+    local current = hl.get_config("decoration.wobble.enabled")
+    local newState = not current
+    hl.config({ decoration = { wobble = { enabled = not current } } })
+    hl.notification.create({
+            text = "Wobbly windows are now set to " .. (newState and "ON." or "OFF."),
+            timeout = 2000,
+            color = "rgb(20c997)",
+            icon = "ok",
+            font_size = 15
+        })
+end
+hl.bind(mainMod .. " + L", function () toggleWobble() end) -- Toggle Wobbly Windows
+
 -- 3. Workspace Management:
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
