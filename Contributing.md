@@ -24,9 +24,9 @@ pbcopy < ~/.ssh/id_ed25519.pub
 ```
 Paste that back into the field on the website, then do:
 ```sh
-ssh -T git@codeberg.org
+ssh -T git@github.com
 ```
-and you'll see an output letting you know you're connected. To verify it, press verify and do what it tells you.
+and you'll see an output letting you know you're connected. To add it, go to profile settings → SSH and GPG keys and add it there. Likewise you can generate a GPG key afterwards.
 
 ## Link Account to your favorite IDE
 Whatever you clone, simply clone via SSH, that's it.
@@ -40,16 +40,16 @@ Whatever you clone, simply clone via SSH, that's it.
     - Put them in `categories/3rd-party/#number. WHATEVERYOUDECIDETONAMEIT`
         - You can add an `author.txt` to the same folder/name the folder after your username; you reserve the right to request a purging of your own 3rd-party commits, if for whatever reason you wish to do so at any time, simply open an issue requesting this
     - Once done, Source Control → Commit and Push
-    - Open your PR via codeberg.org
-    - Once merged you can delete the branch on codeberg.org and locally, in VSCode by navigating to Source Control → click where you used to see `main` and switch back to it → Branch → Delete Branch...
+    - Open your PR via github
+    - Once merged you can delete the branch on github and locally, in VSCode by navigating to Source Control → click where you used to see `main` and switch back to it → Branch → Delete Branch...
 - (Zed method):
     - Open the folder containing the repo you just cloned
     - Up above (where you see `main`, mouse over the leftmost that says `Branch & Stash`) → create your branch by naming it however you like then pressing enter → Publish your branch → make your edits
     - Put them in `categories/3rd-party/#number. WHATEVERYOUDECIDETONAMEIT`
         - You can add an `author.txt` to the same folder/name the folder after your username; you reserve the right to request a purging of your own 3rd-party commits, if for whatever reason you wish to do so at any time, simply open an issue requesting this
     - Once done, Git Panel (`Ctrl + Shift + G`) → Stage All → write your commit message in the field → Commit → Push
-    - Open your PR via codeberg.org
-    - Once merged you can delete the branch on codeberg.org and locally, in Zed by switching back to `main` branch, then mousing over the one you wish to delete and clicking the trash can icon
+    - Open your PR via github
+    - Once merged you can delete the branch on github and locally, in Zed by switching back to `main` branch, then mousing over the one you wish to delete and clicking the trash can icon
 
 # Standards
 - Don't duplicate info, for example if you want to make sure the user has set up wine, point to it in the md via a hyperlink `[whatever you want to put here as the name](../../post-install tweaks/8. windows support/instructions.md)` (note that spaces must actually be replaced with `%20`, this is just a visual example)
